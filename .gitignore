@@ -1,0 +1,44 @@
+## Arquivos de Build e Compilação (.NET / C#)
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio e IDEs
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.cache
+.idea/
+.vscode/
+
+## Pacotes NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+
+## Banco de Dados (Arquivos locais e logs)
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+*.sqlite3
+*.bak
+
+## Configurações Sensíveis e Variáveis de Ambiente
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+*.env
+ConnectionStrings.config
+
+## Arquivos Específicos de WPF e Windows
+*.baml
+*.g.cs
+*.g.i.cs
+Thumbs.db
+Desktop.ini
