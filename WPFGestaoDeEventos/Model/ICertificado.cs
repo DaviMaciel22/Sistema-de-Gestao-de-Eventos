@@ -1,8 +1,6 @@
 ﻿using System;
 
-public class Class1
+public interface ICertificado
 {
-	public Class1()
-	{
-	}
+
 }

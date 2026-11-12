@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class Class1
+abstract class Pagamento
 {
-	public Class1()
+	public Pagamento()
 	{
 	}
 }

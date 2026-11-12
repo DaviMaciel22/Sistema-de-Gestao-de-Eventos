@@ -2,7 +2,6 @@
 
 public class Participante
 {
-	public Participante()
-	{
-	}
+    public int IdParticipante { get; set; } = 0;
+    public string Nome { get; set; }
 }
