@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="WPFGestaoDeEventos.View.MeusIngressos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="White">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Meus Ingressos" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="ListaMeusIngressos">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#0078D7" BorderThickness="1" CornerRadius="8" Margin="0,0,0,15" Padding="15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding Titulo}" FontSize="18" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding DataEHora, StringFormat=dd/MM/yyyy HH:mm}" Foreground="Gray" Margin="0,5,0,0"/>
+                                    <TextBlock Text="Inscrição Confirmada" Foreground="#28A745" FontWeight="Bold" Margin="0,5,0,0"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <Button Content="Ver Ingresso" Margin="0,0,0,5" Padding="15,5" Background="#0078D7" Foreground="White" BorderThickness="0"/>
+                                    <Button Content="Emitir Certificado" Padding="15,5" Background="Transparent" BorderBrush="#0078D7" BorderThickness="1"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
