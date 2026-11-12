@@ -1,8 +1,8 @@
 ﻿using System;
 
-public class Class1
+public class Empresa : Organizador
 {
-	public Class1()
+	public Empresa()
 	{
 	}
 }

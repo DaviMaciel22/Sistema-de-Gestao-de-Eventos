@@ -1,8 +1,14 @@
 ﻿using System;
 
-public class Class1
+public class Inscricao
 {
-	public Class1()
-	{
-	}
+    public int IdInscricao { get; set; }
+    public Evento Evento { get; set; }
+    public Participante Participante { get; set; }
+
+    public override string ToString()
+    {
+        return $"ID: {IdInscricao} / Evento: {Evento.Titulo} / Participante: {Participante.Nome}";
+    }
+
 }
