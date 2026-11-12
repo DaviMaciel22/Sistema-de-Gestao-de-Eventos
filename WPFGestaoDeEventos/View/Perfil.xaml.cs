@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFGestaoDeEventos
+namespace WPFGestaoDeEventos.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interação lógica para Perfil.xam
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Perfil : UserControl
     {
-        public MainWindow()
+        public Perfil()
         {
             InitializeComponent();
         }
