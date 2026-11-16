@@ -1,6 +1,8 @@
 ﻿using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Participante
 {
     public int IdParticipante { get; set; } = 0;
