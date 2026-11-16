@@ -11,4 +11,15 @@ public class Inscricao
         return $"ID: {IdInscricao} / Evento: {Evento.Titulo} / Participante: {Participante.Nome}";
     }
 
+    public void confirmar()
+    {
+        Console.WriteLine("Inscrição confirmada.");
+        //adicionar insert no banco
+    }
+
+    public void cancelar()
+    {
+        Console.WriteLine("Inscrição cancelada.");
+    }
+
 }

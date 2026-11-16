@@ -2,7 +2,13 @@
 
 public class Conferencia : Evento
 {
-	public Conferencia()
-	{
-	}
+    public ICollection<Palestra> Palestras { get; set; } = new List<Palestra>();
+    public int QtdPalestras => Palestras.Count;
+
+    public override string ToString()
+    {
+        return $"ID: {IdEvento} / Título: {Titulo} / Descrição: {Descricao} / Data e Hora: {DataEHora}" +
+            $" / Quantidade de Inscrições: {QntInscricoes} / Vagas Restantes: {VagasRestantes} / Valor: {Valor}" +
+            $" / Duração: {Duracao} / Status: {Status} / Organizador: {Organizador} / Local: {Local} Quantidade de Palestras: {QtdPalestras}";
+    }
 }
