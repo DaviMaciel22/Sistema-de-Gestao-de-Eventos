@@ -4,6 +4,269 @@
              xmlns:local="clr-namespace:WPFGestaoDeEventos"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <!-- Cores do tema: as telas usam estes nomes, nunca o código da cor -->
+        <SolidColorBrush x:Key="CorFundo" Color="#F5F7FA"/>
+        <SolidColorBrush x:Key="CorCartao" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="CorBorda" Color="#E2E8F0"/>
+        <SolidColorBrush x:Key="CorTexto" Color="#1E293B"/>
+        <SolidColorBrush x:Key="CorTextoSecundario" Color="#64748B"/>
+        <SolidColorBrush x:Key="CorPrincipal" Color="#4F46E5"/>
+        <SolidColorBrush x:Key="CorPrincipalHover" Color="#4338CA"/>
+        <SolidColorBrush x:Key="CorPrincipalSuave" Color="#EEF2FF"/>
+        <SolidColorBrush x:Key="CorConfirmado" Color="#16A34A"/>
+        <SolidColorBrush x:Key="CorUtilizado" Color="#2563EB"/>
+        <SolidColorBrush x:Key="CorCancelado" Color="#94A3B8"/>
+        <SolidColorBrush x:Key="CorPerigo" Color="#DC2626"/>
+        <SolidColorBrush x:Key="CorPerigoSuave" Color="#FEF2F2"/>
+        <SolidColorBrush x:Key="CorDesabilitado" Color="#F1F5F9"/>
+
+        <!-- Textos -->
+        <Style x:Key="TituloTela" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTexto}"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+        </Style>
+
+        <Style x:Key="Subtitulo" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTexto}"/>
+        </Style>
+
+        <Style x:Key="Rotulo" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTextoSecundario}"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+
+        <Style x:Key="TextoSecundario" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource CorTextoSecundario}"/>
+        </Style>
+
+        <!-- Cartões e painéis -->
+        <Style x:Key="Cartao" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CorCartao}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16"/>
+        </Style>
+
+        <Style x:Key="Etiqueta" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CorPrincipalSuave}"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="8,2"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextElement.Foreground" Value="{StaticResource CorPrincipal}"/>
+            <Setter Property="TextElement.FontSize" Value="11"/>
+        </Style>
+
+        <!-- Botões: um modelo com cantos arredondados; as variações só trocam as cores -->
+        <Style x:Key="BotaoBase" TargetType="Button">
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{StaticResource CorDesabilitado}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+                    <Setter Property="Foreground" Value="{StaticResource CorCancelado}"/>
+                    <Setter Property="Cursor" Value="Arrow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BotaoPrincipal" TargetType="Button" BasedOn="{StaticResource BotaoBase}">
+            <Setter Property="Background" Value="{StaticResource CorPrincipal}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource CorPrincipalHover}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource CorPrincipalHover}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BotaoSecundario" TargetType="Button" BasedOn="{StaticResource BotaoBase}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+            <Setter Property="Foreground" Value="{StaticResource CorPrincipal}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource CorPrincipalSuave}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BotaoPerigo" TargetType="Button" BasedOn="{StaticResource BotaoBase}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorPerigo}"/>
+            <Setter Property="Foreground" Value="{StaticResource CorPerigo}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource CorPerigoSuave}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Campos: estilos implícitos (valem para todo TextBox, PasswordBox, ComboBox e DatePicker) -->
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTexto}"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="borda" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="borda" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTexto}"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="borda" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="borda" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox redesenhado: o padrão do Windows ignora a cor de fundo -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTexto}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Focusable="False" ClickMode="Press"
+                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="borda" Background="White" BorderBrush="{StaticResource CorBorda}"
+                                                BorderThickness="1" CornerRadius="6">
+                                            <Path Data="M0,0 L4,4 L8,0" Stroke="{StaticResource CorTextoSecundario}" StrokeThickness="1.5"
+                                                  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="borda" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter IsHitTestVisible="False" Margin="10,0,28,0" VerticalAlignment="Center"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"/>
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom"
+                                   AllowsTransparency="True" Focusable="False">
+                                <Border Background="White" BorderBrush="{StaticResource CorBorda}" BorderThickness="1"
+                                        CornerRadius="6" Margin="0,4,0,0" Padding="0,4"
+                                        MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                        MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <ScrollViewer>
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Padding" Value="10,6"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <!-- Item da navegação: RadioButton com cara de link; o marcado fica sublinhado -->
+        <Style x:Key="ItemNavegacao" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="{StaticResource CorTextoSecundario}"/>
+            <Setter Property="Margin" Value="24,0,0,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="sublinhado" Background="Transparent" BorderBrush="Transparent"
+                                BorderThickness="0,0,0,2" Padding="0,6">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource CorPrincipal}"/>
+                                <Setter TargetName="sublinhado" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

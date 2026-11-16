@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Organizador : ICertificado
 {
 	public int IdOrganizador { get; set; } = 0;
@@ -10,7 +12,7 @@ public class Organizador : ICertificado
 
     public ICollection<Evento> Eventos { get; set; } = new List<Evento>();
 
-    public CriarEvento()
+    public void CriarEvento()
     {
         Evento e = new();
     }

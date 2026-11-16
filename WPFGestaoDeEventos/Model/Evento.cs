@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Evento
 {
     public int IdEvento { get; set; } = 0;
@@ -19,7 +21,7 @@ public class Evento
 
     public void abrirInscricoes()
     {
-        foreach (Inscricao i in Inscrcicoes)
+        foreach (Inscricao i in Inscricoes)
         {
             i.ToString();
         }
