@@ -17,10 +17,7 @@ public class Evento
 
     public void abrirInscricoes()
     {
-        foreach (Inscricao i in Inscricoes)
-        {
-            i.ToString();
-        }
+        //abre as inscrições
     }
 
 

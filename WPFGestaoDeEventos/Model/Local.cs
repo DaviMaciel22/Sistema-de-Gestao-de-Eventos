@@ -14,7 +14,10 @@ public class Local
 
     public override string ToString()
     {
-        return base.ToString();
+        return $"ID: {IdLocal} / Capacidade: {Capacidade} / Rua: {Rua} / Número: {Numero} " +
+            $"/ Bairro: {Bairro} / Cidade: {Cidade} / Estado: {Estado} / País: {País}";
     }
+
+
 
 }
