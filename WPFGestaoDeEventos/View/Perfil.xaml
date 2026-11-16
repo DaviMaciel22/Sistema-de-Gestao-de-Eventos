@@ -14,7 +14,7 @@
             <ColumnDefinition Width="420"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Meu perfil" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="lblMeuPerfil" Text="Meu perfil" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
 
         <!-- Dados pessoais: avatar com iniciais + Nome e E-mail -->
         <Grid Grid.Row="1">
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Width="120" Height="120" CornerRadius="60" VerticalAlignment="Top"
+            <Border x:Name="CirculoDeFundoDasIniciais" Width="120" Height="120" CornerRadius="60" VerticalAlignment="Top"
                     Background="{StaticResource CorPrincipalSuave}"
                     BorderBrush="{StaticResource CorPrincipal}" BorderThickness="1">
                 <TextBlock x:Name="txtIniciais" Text="AS" FontSize="36"
@@ -32,10 +32,10 @@
             </Border>
 
             <StackPanel Grid.Column="1" Margin="32,0,0,0">
-                <TextBlock Text="Nome" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblNome" Text="Nome" Style="{StaticResource Rotulo}"/>
                 <TextBox x:Name="txtNome" Margin="0,0,0,16"/>
 
-                <TextBlock Text="E-mail" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblEmail" Text="E-mail" Style="{StaticResource Rotulo}"/>
                 <TextBox x:Name="txtEmail" Margin="0,0,0,24"/>
 
                 <Button x:Name="btnSalvar" Content="Salvar alterações"
@@ -47,15 +47,15 @@
         <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top"
                 Style="{StaticResource Cartao}" Padding="20">
             <StackPanel>
-                <TextBlock Text="Alterar senha" Style="{StaticResource Subtitulo}" Margin="0,0,0,16"/>
+                <TextBlock x:Name="lblAlterarSenha" Text="Alterar senha" Style="{StaticResource Subtitulo}" Margin="0,0,0,16"/>
 
-                <TextBlock Text="Senha atual" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblSenhaAtual" Text="Senha atual" Style="{StaticResource Rotulo}"/>
                 <PasswordBox x:Name="pbSenhaAtual" Margin="0,0,0,12"/>
 
-                <TextBlock Text="Nova senha" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblNovaSenha" Text="Nova senha" Style="{StaticResource Rotulo}"/>
                 <PasswordBox x:Name="pbNovaSenha" Margin="0,0,0,12"/>
 
-                <TextBlock Text="Confirmar nova senha" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblConfirmarNovaSenha" Text="Confirmar nova senha" Style="{StaticResource Rotulo}"/>
                 <PasswordBox x:Name="pbConfirmacao" Margin="0,0,0,20"/>
 
                 <Button x:Name="btnAlterarSenha" Content="Alterar senha"
@@ -68,7 +68,7 @@
             <Rectangle Height="1" Stroke="{StaticResource CorCancelado}" StrokeDashArray="6 4" Margin="0,0,0,16"/>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="btnExcluirConta" Content="Excluir conta" Style="{StaticResource BotaoPerigo}"/>
-                <TextBlock Text="Pede confirmação. Não é possível excluir com ingresso confirmado."
+                <TextBlock x:Name="lblAvisoMeuPerfil" Text="Pede confirmação. Não é possível excluir com ingresso confirmado."
                            Style="{StaticResource TextoSecundario}" VerticalAlignment="Center" Margin="16,0,0,0"/>
             </StackPanel>
         </StackPanel>

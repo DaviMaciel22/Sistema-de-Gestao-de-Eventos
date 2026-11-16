@@ -8,7 +8,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Eventos disponíveis" Style="{StaticResource TituloTela}"/>
+        <TextBlock x:Name="lblEventosDisponiveis" Text="Eventos disponíveis" Style="{StaticResource TituloTela}"/>
 
         <!-- Filtros: o botão Filtrar chama EventoController.Buscar (funcionalidade via SQL) -->
         <Grid Grid.Row="1" Margin="0,0,0,20">
@@ -21,21 +21,21 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel>
-                <TextBlock Text="Buscar" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblBuscar" Text="Buscar" Style="{StaticResource Rotulo}"/>
                 <TextBox x:Name="txtBuscar" ToolTip="Nome do evento"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Margin="16,0,0,0">
-                <TextBlock Text="Data" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblData" Text="Data" Style="{StaticResource Rotulo}"/>
                 <DatePicker x:Name="dpData"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Margin="16,0,0,0">
-                <TextBlock Text="Cidade" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblCidade" Text="Cidade" Style="{StaticResource Rotulo}"/>
                 <ComboBox x:Name="cbCidade" SelectedIndex="0">
                     <ComboBoxItem Content="Todas"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Grid.Column="3" Margin="16,0,0,0">
-                <TextBlock Text="Tipo" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblTipo" Text="Tipo" Style="{StaticResource Rotulo}"/>
                 <ComboBox x:Name="cbTipo" SelectedIndex="0">
                     <ComboBoxItem Content="Todos"/>
                     <ComboBoxItem Content="Conferência"/>

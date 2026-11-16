@@ -38,6 +38,10 @@ namespace WPFGestaoDeEventos.View
             AreaPrincipal.Content = new WPFGestaoDeEventos.View.Perfil();
         }
 
+        private void TelaInicial_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 
