@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Local
 {
     public int IdLocal { get; set; } = 0;

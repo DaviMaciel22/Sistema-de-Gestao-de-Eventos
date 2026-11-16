@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Workshop : Evento
 {
     public Palestra Palestra { get; set; }

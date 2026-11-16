@@ -1,5 +1,7 @@
 ﻿using System;
 
+namespace WPFGestaoDeEventos.Model;
+
 public class Inscricao
 {
     public int IdInscricao { get; set; }
