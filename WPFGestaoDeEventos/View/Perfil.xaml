@@ -1,36 +1,76 @@
 ﻿<UserControl x:Class="WPFGestaoDeEventos.View.Perfil"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="White">
-    <Grid Margin="20">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="350">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="32"/>
+            <ColumnDefinition Width="420"/>
+        </Grid.ColumnDefinitions>
 
-            <!-- Avatar / Ícone -->
-            <Ellipse Width="100" Height="100" Fill="#E0E0E0" Stroke="Gray" StrokeThickness="1" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-            <TextBlock Text="Meu Perfil" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+        <TextBlock Text="Meu perfil" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
 
-            <!-- Campos de Dados -->
-            <TextBlock Text="Nome:" FontWeight="SemiBold" Margin="0,0,0,5"/>
-            <TextBox x:Name="txtNome" Padding="8" Margin="0,0,0,15" FontSize="14"/>
+        <!-- Dados pessoais: avatar com iniciais + Nome e E-mail -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="E-mail:" FontWeight="SemiBold" Margin="0,0,0,5"/>
-            <TextBox x:Name="txtEmail" Padding="8" Margin="0,0,0,25" FontSize="14"/>
+            <Border Width="120" Height="120" CornerRadius="60" VerticalAlignment="Top"
+                    Background="{StaticResource CorPrincipalSuave}"
+                    BorderBrush="{StaticResource CorPrincipal}" BorderThickness="1">
+                <TextBlock x:Name="txtIniciais" Text="AS" FontSize="36"
+                           Foreground="{StaticResource CorPrincipal}"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
 
-            <!-- Botões de Ação -->
-            <Button Content="Editar Dados" Padding="10" Background="#28A745" Foreground="White" FontSize="14" FontWeight="Bold" BorderThickness="0" Margin="0,0,0,15"/>
+            <StackPanel Grid.Column="1" Margin="32,0,0,0">
+                <TextBlock Text="Nome" Style="{StaticResource Rotulo}"/>
+                <TextBox x:Name="txtNome" Margin="0,0,0,16"/>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                <TextBlock Text="E-mail" Style="{StaticResource Rotulo}"/>
+                <TextBox x:Name="txtEmail" Margin="0,0,0,24"/>
 
-                <Button Grid.Column="0" Content="Alterar Senha" Padding="10" Background="Transparent" BorderBrush="Gray" BorderThickness="1"/>
-                <Button Grid.Column="2" Content="Excluir Conta" Padding="10" Background="#DC3545" Foreground="White" BorderThickness="0"/>
-            </Grid>
+                <Button x:Name="btnSalvar" Content="Salvar alterações"
+                        Style="{StaticResource BotaoPrincipal}" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
 
+        <!-- Alterar senha -->
+        <Border Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Top"
+                Style="{StaticResource Cartao}" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Alterar senha" Style="{StaticResource Subtitulo}" Margin="0,0,0,16"/>
+
+                <TextBlock Text="Senha atual" Style="{StaticResource Rotulo}"/>
+                <PasswordBox x:Name="pbSenhaAtual" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Nova senha" Style="{StaticResource Rotulo}"/>
+                <PasswordBox x:Name="pbNovaSenha" Margin="0,0,0,12"/>
+
+                <TextBlock Text="Confirmar nova senha" Style="{StaticResource Rotulo}"/>
+                <PasswordBox x:Name="pbConfirmacao" Margin="0,0,0,20"/>
+
+                <Button x:Name="btnAlterarSenha" Content="Alterar senha"
+                        Style="{StaticResource BotaoSecundario}" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Zona de perigo: linha tracejada + Excluir conta -->
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Margin="0,24,0,0">
+            <Rectangle Height="1" Stroke="{StaticResource CorCancelado}" StrokeDashArray="6 4" Margin="0,0,0,16"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnExcluirConta" Content="Excluir conta" Style="{StaticResource BotaoPerigo}"/>
+                <TextBlock Text="Pede confirmação. Não é possível excluir com ingresso confirmado."
+                           Style="{StaticResource TextoSecundario}" VerticalAlignment="Center" Margin="16,0,0,0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
-    

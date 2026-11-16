@@ -1,41 +1,169 @@
 ﻿<UserControl x:Class="WPFGestaoDeEventos.View.MeusIngressos"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="White">
-    <Grid Margin="20">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <!-- Etiqueta de status: a cor sai do valor de Inscricao.Status -->
+        <Style x:Key="EtiquetaStatus" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="8,1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CorBorda}"/>
+            <Setter Property="TextElement.Foreground" Value="{StaticResource CorTextoSecundario}"/>
+            <Setter Property="TextElement.FontSize" Value="11"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="Confirmado">
+                    <Setter Property="BorderBrush" Value="{StaticResource CorConfirmado}"/>
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource CorConfirmado}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Utilizado">
+                    <Setter Property="BorderBrush" Value="{StaticResource CorUtilizado}"/>
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource CorUtilizado}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Cancelado">
+                    <Setter Property="BorderBrush" Value="{StaticResource CorCancelado}"/>
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource CorCancelado}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Item da lista em formato de cartão; o selecionado fica destacado -->
+        <Style x:Key="ItemIngresso" TargetType="ListBoxItem">
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="cartao" Background="White" BorderBrush="{StaticResource CorBorda}"
+                                BorderThickness="1" CornerRadius="6" Padding="12">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="cartao" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="cartao" Property="Background" Value="{StaticResource CorPrincipalSuave}"/>
+                                <Setter TargetName="cartao" Property="BorderBrush" Value="{StaticResource CorPrincipal}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition Width="24"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Meus Ingressos" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+        <TextBlock Text="Meus ingressos" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="ListaMeusIngressos">
-                <ItemsControl.ItemTemplate>
+        <!-- Filtros -->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,0,0,16">
+            <StackPanel Width="380">
+                <TextBlock Text="Buscar" Style="{StaticResource Rotulo}"/>
+                <TextBox x:Name="txtBuscar" ToolTip="Nome do evento"/>
+            </StackPanel>
+            <StackPanel Width="200" Margin="24,0,0,0">
+                <TextBlock Text="Status" Style="{StaticResource Rotulo}"/>
+                <ComboBox x:Name="cbStatus" SelectedIndex="0">
+                    <ComboBoxItem Content="Todos"/>
+                    <ComboBoxItem Content="Confirmado"/>
+                    <ComboBoxItem Content="Cancelado"/>
+                    <ComboBoxItem Content="Utilizado"/>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Lista de ingressos (cada item é uma Inscricao) -->
+        <Border Grid.Row="2" Style="{StaticResource Cartao}" Padding="12,12,12,4">
+            <ListBox x:Name="lbIngressos" BorderThickness="0" Background="Transparent"
+                     ItemContainerStyle="{StaticResource ItemIngresso}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="#0078D7" BorderThickness="1" CornerRadius="8" Margin="0,0,0,15" Padding="15">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel Grid.Column="0">
-                                    <TextBlock Text="{Binding Titulo}" FontSize="18" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{Binding DataEHora, StringFormat=dd/MM/yyyy HH:mm}" Foreground="Gray" Margin="0,5,0,0"/>
-                                    <TextBlock Text="Inscrição Confirmada" Foreground="#28A745" FontWeight="Bold" Margin="0,5,0,0"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <Button Content="Ver Ingresso" Margin="0,0,0,5" Padding="15,5" Background="#0078D7" Foreground="White" BorderThickness="0"/>
-                                    <Button Content="Emitir Certificado" Padding="15,5" Background="Transparent" BorderBrush="#0078D7" BorderThickness="1"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Evento.DataEHora, StringFormat=dd/MM/yyyy · HH:mm}"
+                                           Style="{StaticResource Rotulo}"/>
+                                <TextBlock Text="{Binding Evento.Titulo}" FontSize="16" FontWeight="SemiBold"
+                                           TextTrimming="CharacterEllipsis" Margin="0,0,0,6"/>
+                            </StackPanel>
+                            <Border Style="{StaticResource EtiquetaStatus}"
+                                    HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <TextBlock Text="{Binding Status}"/>
+                            </Border>
+                        </Grid>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <!-- Detalhes do ingresso selecionado (preenchidos no SelectionChanged da lista) -->
+        <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource Cartao}" Padding="24">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                    <Button x:Name="btnCancelar" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}"
+                            VerticalAlignment="Top"/>
+                    <StackPanel Margin="16,0,0,0">
+                        <Button x:Name="btnCertificado" Content="Ver certificado"
+                                Style="{StaticResource BotaoSecundario}" IsEnabled="False"/>
+                        <TextBlock Text="(só depois do check-in)" FontSize="11"
+                                   Style="{StaticResource TextoSecundario}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock x:Name="txtTituloEvento" Text="Selecione um ingresso"
+                               FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,16"/>
+
+                    <WrapPanel Margin="0,0,0,6">
+                        <TextBlock Margin="0,0,32,0">
+                            <Run Text="Data: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runData"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo"/>
+                        </TextBlock>
+                    </WrapPanel>
+                    <TextBlock Margin="0,0,0,6">
+                        <Run Text="Local: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runLocal"/>
+                    </TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,16">
+                        <Run Text="Descrição: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDescricao"/>
+                    </TextBlock>
+
+                    <!-- Palestras: composição Evento → Palestra -->
+                    <TextBlock Text="Palestras" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"/>
+                    <ItemsControl x:Name="icPalestras" Margin="12,0,0,16">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,0,0,2">
+                                    <Run Text="•  "/><Run Text="{Binding DataEHora, StringFormat=HH:mm}" Foreground="{StaticResource CorPrincipal}"/>
+                                    <Run Text="{Binding Titulo}"/><Run Text=" — "/><Run Text="{Binding Palestrante.Nome}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <WrapPanel>
+                        <TextBlock Margin="0,0,32,0">
+                            <Run Text="Código do ingresso: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runCodigo"/>
+                        </TextBlock>
+                        <TextBlock>
+                            <Run Text="Status: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runStatus"/>
+                        </TextBlock>
+                    </WrapPanel>
+                </StackPanel>
+            </DockPanel>
+        </Border>
     </Grid>
 </UserControl>
