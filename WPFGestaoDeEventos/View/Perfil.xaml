@@ -21,6 +21,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Border x:Name="CirculoDeFundoDasIniciais" Width="120" Height="120" CornerRadius="60" VerticalAlignment="Top"
@@ -74,3 +76,4 @@
         </StackPanel>
     </Grid>
 </UserControl>
+    

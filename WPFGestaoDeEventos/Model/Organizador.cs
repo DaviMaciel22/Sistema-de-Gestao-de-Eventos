@@ -16,4 +16,9 @@ public class Organizador : ICertificado
     {
         Evento e = new();
     }
+
+    public void CancelarEvento(Evento evento)
+    {
+        //cancela o evento
+    }
 }
