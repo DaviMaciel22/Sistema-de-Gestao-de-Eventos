@@ -39,11 +39,17 @@ O projeto segue o padrão MVC de forma explícita. Os arquivos de code-behind da
 ```
 WPFGestaoDeEventos/
 ├── Model/         Entidades do domínio (Evento, Inscricao, Participante, Organizador...)
-├── View/          MainWindow (barra de navegação) e as telas Home, Meus ingressos e Perfil
-├── Controller/    Recebem as ações das telas e aplicam as regras (a criar)
-├── Data/          AppDbContext e Migrations do EF Core (a criar)
-└── Repository/    Acesso ao banco, incluindo a consulta escrita em SQL (a criar)
+├── View/          MainWindow (barra de navegação) e as telas TelaInicial, MeusIngressos e Perfil
+├── Controller/    EventoController, InscricaoController e ParticipanteController
+├── Data/          AppDbContext e Migrations do EF Core
+└── Repository/    Acesso ao banco, incluindo a busca de eventos escrita em SQL
 ```
+
+| Tela | Controller | Ações |
+|---|---|---|
+| Home (`TelaInicial`) | `EventoController`, `InscricaoController` | `ListarDisponiveis()`, `Buscar(nome, data, cidade, tipo)`, `Inscrever(participanteId, eventoId)` |
+| Meus ingressos (`MeusIngressos`) | `InscricaoController` | `ListarPorParticipante(participanteId)`, `Cancelar(inscricaoId)` |
+| Perfil (`Perfil`) | `ParticipanteController` | `ObterAtual()`, `AtualizarDados(nome, email)`, `AlterarSenha(atual, nova, confirmacao)`, `ExcluirConta()` |
 
 ## Modelo de dados
 
@@ -57,7 +63,7 @@ O banco cobre os relacionamentos pedidos no trabalho:
 | 1x1 | `Inscricao` e `Certificado` |
 | Composição | `Evento` e `Palestra` (as palestras são excluídas junto com o evento) |
 | Agregação | `Evento` e `Local` (o local continua existindo sem o evento) |
-| Funcionalidade via SQL | Consulta escrita à mão no repositório, além das consultas do EF (em definição) |
+| Funcionalidade via SQL | Busca de eventos da Home (nome, data, cidade e tipo), feita com uma consulta SQL parametrizada no repositório |
 
 ## Como executar
 
