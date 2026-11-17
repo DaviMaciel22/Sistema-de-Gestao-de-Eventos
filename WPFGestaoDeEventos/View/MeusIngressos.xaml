@@ -60,19 +60,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Meus Ingressos" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
-
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="ListaMeusIngressos">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="#0078D7" BorderThickness="1" CornerRadius="8" Margin="0,0,0,15" Padding="15">
-                            <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="380"/>
             <ColumnDefinition Width="24"/>
             <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock x:Name="lblMeusIngressos" Text="Meus ingressos" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
