@@ -3,11 +3,11 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WPFGestaoDeEventos.Model;
 
-public class Organizador : ICertificado
+public class Organizador
 {
-	public int IdOrganizador { get; set; } = 0;
-    public string Numero { get; set; }
-    public string Email { get; set; }
+	public int OrganizadorId { get; set; }
+    public string Numero { get; set; } = null!;
+    public string Email { get; set; } = null!;
     public int TipoOrganizador { get; set; }
 
     public ICollection<Evento> Eventos { get; set; } = new List<Evento>();

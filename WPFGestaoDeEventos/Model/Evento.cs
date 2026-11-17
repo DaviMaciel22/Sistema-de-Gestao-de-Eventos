@@ -4,7 +4,7 @@ namespace WPFGestaoDeEventos.Model;
 
 public class Evento
 {
-    public int IdEvento { get; set; } = 0;
+    public int EventoId { get; set; }
     public string Titulo { get; set; } = null!;
     public string Descricao { get; set; } = null!;   
     public DateTime DataEHora { get; set; }
@@ -14,10 +14,10 @@ public class Evento
     public string Duracao { get; set; } = null!;
     public string Status { get; set; } = null!;
 
-    public int IdOrganizador { get; set; }
+    public int OrganizadorId { get; set; }
     public Organizador Organizador { get; set; } = null!;
 
-    public int IdLocal { get; set; }
+    public int LocalId { get; set; }
     public Local Local { get; set; } = null!;
 
     public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
