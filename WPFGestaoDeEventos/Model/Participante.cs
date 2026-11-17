@@ -5,10 +5,10 @@ namespace WPFGestaoDeEventos.Model;
 
 public class Participante
 {
-    public int IdParticipante { get; set; } = 0;
-    public string Nome { get; set; }
-    public string CPF { get; set; }
-    public string Email { get; set; }
+    public int ParticipanteId { get; set; }
+    public string Nome { get; set; } = null!;
+    public string CPF { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
     public void confirmar()
     {
@@ -25,7 +25,7 @@ public class Participante
 
     public override string ToString()
     {
-        return $"ID: {IdParticipante} / Nome: {Nome} / CPF: {CPF} / Email: {Email}";
+        return $"ID: {ParticipanteId} / Nome: {Nome} / CPF: {CPF} / Email: {Email}";
     }
 
     
