@@ -4,7 +4,7 @@ namespace WPFGestaoDeEventos.Model;
 
 public class Workshop : Evento
 {
-    public int idPalestra { get; set; }
+    public int PalestraId { get; set; }
     public Palestra Palestra { get; set; } = null!;
 
 
@@ -12,6 +12,6 @@ public class Workshop : Evento
     {
         return $"ID: {EventoId} / Título: {Titulo} / Descrição: {Descricao} / Data e Hora: {DataEHora}" +
             $" / Quantidade de Inscrições: {QntInscricoes} / Vagas Restantes: {VagasRestantes} / Valor: {Valor}" +
-            $" / Duração: {Duracao} / Status: {Status} / Organizador: {Organizador} / Local: {Local}";
+            $" / Duração: {Duracao} / Status: {Status} / Organizador: {Organizador.OrganizadorId} / Local: {Local.Nome}";
     }
 }
