@@ -67,16 +67,16 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Meus ingressos" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
+        <TextBlock x:Name="lblMeusIngressos" Text="Meus ingressos" Style="{StaticResource TituloTela}" Grid.ColumnSpan="3"/>
 
         <!-- Filtros -->
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,0,0,16">
             <StackPanel Width="380">
-                <TextBlock Text="Buscar" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblBuscarMeusIngressos" Text="Buscar" Style="{StaticResource Rotulo}"/>
                 <TextBox x:Name="txtBuscar" ToolTip="Nome do evento"/>
             </StackPanel>
             <StackPanel Width="200" Margin="24,0,0,0">
-                <TextBlock Text="Status" Style="{StaticResource Rotulo}"/>
+                <TextBlock x:Name="lblStatusMeusIngressos" Text="Status" Style="{StaticResource Rotulo}"/>
                 <ComboBox x:Name="cbStatus" SelectedIndex="0">
                     <ComboBoxItem Content="Todos"/>
                     <ComboBoxItem Content="Confirmado"/>
@@ -111,15 +111,15 @@
         </Border>
 
         <!-- Detalhes do ingresso selecionado (preenchidos no SelectionChanged da lista) -->
-        <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource Cartao}" Padding="24">
+        <Border x:Name="FundoEvento" Grid.Row="2" Grid.Column="2" Style="{StaticResource Cartao}" Padding="24">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,25,0,0">
                     <Button x:Name="btnCancelar" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}"
                             VerticalAlignment="Top"/>
                     <StackPanel Margin="16,0,0,0">
                         <Button x:Name="btnCertificado" Content="Ver certificado"
                                 Style="{StaticResource BotaoSecundario}" IsEnabled="False"/>
-                        <TextBlock Text="(só depois do check-in)" FontSize="11"
+                        <TextBlock x:Name="lblAviso" Text="(só depois do check-in)" FontSize="11"
                                    Style="{StaticResource TextoSecundario}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
                 </StackPanel>
@@ -129,22 +129,21 @@
                                FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,16"/>
 
                     <WrapPanel Margin="0,0,0,6">
-                        <TextBlock Margin="0,0,32,0">
-                            <Run Text="Data: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runData"/>
-                        </TextBlock>
-                        <TextBlock>
-                            <Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo"/>
-                        </TextBlock>
+                        <TextBlock x:Name="lblDataEHoraEvento" Margin="0,0,32,0"><Run Foreground="#FF64748B" Text="Data"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="E"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="Hora"/><Run Foreground="#FF64748B" Text=": "/><Run x:Name="runData"/></TextBlock>
+                        <TextBlock x:Name="lblTipoEvento" RenderTransformOrigin="0.477,0.512"><Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo"/></TextBlock>
                     </WrapPanel>
-                    <TextBlock Margin="0,0,0,6">
+                    <TextBlock x:Name="lblDuracao" Margin="0,0,0,6">
+                        <Run Text="Duração: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDuração"/>
+                    </TextBlock>
+                    <TextBlock x:Name="lblLocal" Margin="0,0,0,6">
                         <Run Text="Local: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runLocal"/>
                     </TextBlock>
-                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,16">
+                    <TextBlock x:Name="lblDescricao" TextWrapping="Wrap" Margin="0,0,0,16">
                         <Run Text="Descrição: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDescricao"/>
                     </TextBlock>
 
                     <!-- Palestras: composição Evento → Palestra -->
-                    <TextBlock Text="Palestras" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"/>
+                    <TextBlock x:Name="lblPalestras" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"><Run Text="Palestras"/><Run Language="pt-br" Text=":"/></TextBlock>
                     <ItemsControl x:Name="icPalestras" Margin="12,0,0,16">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -157,10 +156,10 @@
                     </ItemsControl>
 
                     <WrapPanel>
-                        <TextBlock Margin="0,0,32,0">
+                        <TextBlock x:Name="lblCodigoDoIngresso" Margin="0,0,32,0">
                             <Run Text="Código do ingresso: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runCodigo"/>
                         </TextBlock>
-                        <TextBlock>
+                        <TextBlock x:Name="lblStatusMeusIngressos1">
                             <Run Text="Status: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runStatus"/>
                         </TextBlock>
                     </WrapPanel>
