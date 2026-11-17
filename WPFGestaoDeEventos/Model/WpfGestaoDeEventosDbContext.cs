@@ -29,25 +29,53 @@ namespace WPFGestaoDeEventos.Model
         {
             // base.OnModelCreating(modelBuilder);
 
+            //Relação 1:N entre Organizador e Evento
             modelBuilder.Entity<Organizador>()
                 .HasMany(o => o.Eventos)
                 .WithOne(e => e.Organizador)
                 .HasForeignKey(e => e.OrganizadorId);
 
+            //Relação 1:N entre Evento e Inscricao
             modelBuilder.Entity<Evento>()
                 .HasMany(e => e.Inscricoes)
                 .WithOne(i => i.Evento)
                 .HasForeignKey(i => i.EventoId);
 
+            //Relação 1:N entre Participante e Inscricao
             modelBuilder.Entity<Participante>()
                 .HasMany(p => p.Inscricoes)
                 .WithOne(i => i.Participante)
                 .HasForeignKey(i => i.ParticipanteId);
 
-            modelBuilder.Entity<Participante>()
-                .HasMany(p => p.Inscricoes)
-                .WithOne(i => i.Participante)
-                .HasForeignKey(i => i.ParticipanteId);
+            //Relação 1:1 entre Certificado e Inscricao
+            modelBuilder.Entity<Certificado>()
+                .HasOne(c => c.Inscricao)
+                .WithOne(i => i.Certificado)
+                .HasForeignKey<Certificado>(c => c.InscricaoId);
+
+            //Relação 1:N entre Local e Evento
+            modelBuilder.Entity<Local>()
+                .HasMany(l => l.Eventos)
+                .WithOne(e => e.Local)
+                .HasForeignKey(e => e.LocalId);
+
+            //Relação 1:N entre Conferencia e Palestra
+            modelBuilder.Entity<Conferencia>()
+                .HasMany(c => c.Palestras)
+                .WithOne(p => p.Conferencia)
+                .HasForeignKey(p => p.ConferenciaId);
+
+            //Relação 1:1 entre Workshop e Palestra
+            modelBuilder.Entity<Workshop>()
+                .HasOne(w => w.Palestra)
+                .WithOne(p => p.Workshop)
+                .HasForeignKey<Palestra>(p => p.WorkshopId);
+
+            //Relação 1:N entre Palestrante e Palestra
+            modelBuilder.Entity<Palestrante>()
+                .HasMany(palestrante => palestrante.Palestras)
+                .WithOne(palestra => palestra.Palestrante)
+                .HasForeignKey(palestra => palestra.PalestranteId);
 
         }
     }

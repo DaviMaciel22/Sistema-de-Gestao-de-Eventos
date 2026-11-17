@@ -12,6 +12,8 @@ public class Inscricao
     public int ParticipanteId { get; set; }
     public Participante Participante { get; set; } = null!;
 
+    public Certificado Certificado { get; set; } = null!;
+
     public override string ToString()
     {
         return $"ID: {InscricaoId} / Evento: {Evento.Titulo} / Participante: {Participante.Nome}";
