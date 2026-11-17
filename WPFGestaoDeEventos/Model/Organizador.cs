@@ -3,14 +3,19 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WPFGestaoDeEventos.Model;
 
-public class Organizador
+public class Organizador : IEmissorCertificado
 {
 	public int OrganizadorId { get; set; }
     public string Numero { get; set; } = null!;
     public string Email { get; set; } = null!;
-    public int TipoOrganizador { get; set; }
 
     public ICollection<Evento> Eventos { get; set; } = new List<Evento>();
+
+    public Certificado emitirCertificado(Inscricao i)
+    {
+        // implementação para emitir certificado
+        return new Certificado();
+    }
 
     public void CriarEvento()
     {
