@@ -6,9 +6,8 @@ namespace WPFGestaoDeEventos.Controller
 {
     public class InscricaoController
     {
-        // Home: botão "Garantir ingresso". Eventos gratuitos não geram pagamento.
-        // metodoPagamento: "Pix", "Cartao" ou "Boleto".
-        public Inscricao Inscrever(int participanteId, int eventoId, string metodoPagamento = "Pix")
+        // Home: botão "Garantir ingresso"
+        public Inscricao Inscrever(int participanteId, int eventoId)
         {
             using var contexto = new AppDbContext();
 
@@ -44,13 +43,6 @@ namespace WPFGestaoDeEventos.Controller
                 Participante = participante
             };
 
-            if (evento.Valor > 0)
-            {
-                Pagamento pagamento = CriarPagamento(metodoPagamento, evento.Valor);
-                pagamento.Pagar();
-                inscricao.Pagamento = pagamento;
-            }
-
             contexto.Inscricoes.Add(inscricao);
             contexto.SaveChanges();
 
@@ -65,8 +57,7 @@ namespace WPFGestaoDeEventos.Controller
             return contexto.Inscricoes
                 .Include(i => i.Evento).ThenInclude(e => e.Local)
                 .Include(i => i.Evento).ThenInclude(e => e.Organizador)
-                .Include(i => i.Evento).ThenInclude(e => e.Palestras).ThenInclude(p => p.Palestrantes)
-                .Include(i => i.Pagamento)
+                .Include(i => i.Evento).ThenInclude(e => e.Palestras).ThenInclude(p => p.Palestrante)
                 .Include(i => i.Certificado)
                 .Where(i => i.ParticipanteId == participanteId)
                 .OrderBy(i => i.Evento.DataEHora)
@@ -104,18 +95,6 @@ namespace WPFGestaoDeEventos.Controller
             contexto.SaveChanges();
 
             return certificado;
-        }
-
-        // Fábrica das formas de pagamento (Strategy: cada uma implementa Pagar())
-        private static Pagamento CriarPagamento(string metodo, double valor)
-        {
-            return metodo switch
-            {
-                "Pix" => new PagamentoPix { Valor = valor },
-                "Cartao" => new PagamentoCartao { Valor = valor },
-                "Boleto" => new PagamentoBoleto { Valor = valor },
-                _ => throw new ArgumentException("Forma de pagamento inválida.")
-            };
         }
     }
 }

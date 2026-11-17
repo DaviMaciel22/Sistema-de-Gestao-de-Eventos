@@ -12,7 +12,6 @@ namespace WPFGestaoDeEventos.Data
         public DbSet<Palestrante> Palestrantes { get; set; } = null!;
         public DbSet<Participante> Participantes { get; set; } = null!;
         public DbSet<Inscricao> Inscricoes { get; set; } = null!;
-        public DbSet<Pagamento> Pagamentos { get; set; } = null!;
         public DbSet<Certificado> Certificados { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -104,24 +103,12 @@ namespace WPFGestaoDeEventos.Data
                     .HasForeignKey(i => i.ParticipanteId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                // 1x1: Inscricao <-> Pagamento
-                inscricao.HasOne(i => i.Pagamento)
-                    .WithOne(p => p.Inscricao)
-                    .HasForeignKey<Pagamento>(p => p.InscricaoId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
                 // 1x1: Inscricao <-> Certificado
                 inscricao.HasOne(i => i.Certificado)
                     .WithOne(c => c.Inscricao)
                     .HasForeignKey<Certificado>(c => c.InscricaoId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
-
-            // Herança: Pagamento -> Pix / Cartao / Boleto
-            modelBuilder.Entity<Pagamento>().HasKey(p => p.IdPagamento);
-            modelBuilder.Entity<PagamentoPix>();
-            modelBuilder.Entity<PagamentoCartao>();
-            modelBuilder.Entity<PagamentoBoleto>();
 
             modelBuilder.Entity<Certificado>().HasKey(c => c.IdCertificado);
         }
@@ -266,18 +253,14 @@ namespace WPFGestaoDeEventos.Data
             var inscricaoCSharp = new Inscricao
             {
                 Participante = ana,
-                Evento = workshopCSharp,
-                Pagamento = new PagamentoPix { Valor = workshopCSharp.Valor }
+                Evento = workshopCSharp
             };
-            inscricaoCSharp.Pagamento.Pagar();
 
             var inscricaoConferencia = new Inscricao
             {
                 Participante = ana,
-                Evento = conferenciaTech,
-                Pagamento = new PagamentoCartao { Valor = conferenciaTech.Valor }
+                Evento = conferenciaTech
             };
-            inscricaoConferencia.Pagamento.Pagar();
 
             var inscricaoSemanaTi = new Inscricao
             {

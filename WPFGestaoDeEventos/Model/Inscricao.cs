@@ -12,8 +12,7 @@ public class Inscricao : ICertificado
     public int ParticipanteId { get; set; }
     public Participante Participante { get; set; } = null!;
 
-    // 1x1 (opcionais): evento gratuito não tem pagamento; certificado só após o check-in
-    public Pagamento? Pagamento { get; set; }
+    // 1x1 (opcional): o certificado só existe depois do check-in
     public Certificado? Certificado { get; set; }
 
     public Certificado Emitir()
