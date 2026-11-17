@@ -1,8 +1,12 @@
-﻿using System;
-
-public class PagamentoCartao
+namespace WPFGestaoDeEventos.Model
 {
-	public PagamentoCartao()
-	{
-	}
+    public class PagamentoCartao : Pagamento
+    {
+        public override string Metodo => "Cartão";
+
+        public override void Pagar()
+        {
+            Confirmar();
+        }
+    }
 }

@@ -1,8 +1,12 @@
-﻿using System;
-
-public class PagamentoPix
+namespace WPFGestaoDeEventos.Model
 {
-	public PagamentoPix()
-	{
-	}
+    public class PagamentoPix : Pagamento
+    {
+        public override string Metodo => "Pix";
+
+        public override void Pagar()
+        {
+            Confirmar();
+        }
+    }
 }

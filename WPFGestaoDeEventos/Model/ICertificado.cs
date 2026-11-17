@@ -1,6 +1,7 @@
-﻿using System;
-
-public interface ICertificado
+namespace WPFGestaoDeEventos.Model
 {
-
+    public interface ICertificado
+    {
+        Certificado Emitir();
+    }
 }

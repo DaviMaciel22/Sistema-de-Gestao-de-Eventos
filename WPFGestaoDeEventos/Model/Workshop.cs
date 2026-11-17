@@ -1,8 +1,7 @@
-﻿using System;
-
-public class Workshop : Evento
+namespace WPFGestaoDeEventos.Model
 {
-	public Workshop()
-	{
-	}
+    public class Workshop : Evento
+    {
+        public override string NomeTipo => "Workshop";
+    }
 }

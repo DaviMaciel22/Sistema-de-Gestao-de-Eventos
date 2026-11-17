@@ -1,8 +1,7 @@
-﻿using System;
-
-public class PessoaFisica : Organizador
+namespace WPFGestaoDeEventos.Model
 {
-	public PessoaFisica()
-	{
-	}
+    public class PessoaFisica : Organizador
+    {
+        public string Cpf { get; set; } = string.Empty;
+    }
 }

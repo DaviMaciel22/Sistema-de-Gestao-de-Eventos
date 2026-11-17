@@ -1,8 +1,7 @@
-﻿using System;
-
-public class Empresa : Organizador
+namespace WPFGestaoDeEventos.Model
 {
-	public Empresa()
-	{
-	}
+    public class Empresa : Organizador
+    {
+        public string Cnpj { get; set; } = string.Empty;
+    }
 }
