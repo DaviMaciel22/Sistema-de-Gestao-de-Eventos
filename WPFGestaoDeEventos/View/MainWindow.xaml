@@ -16,7 +16,7 @@
 
         <!-- Barra superior: saudação à esquerda, navegação à direita -->
         <Border Background="{StaticResource CorCartao}" BorderBrush="{StaticResource CorBorda}"
-                BorderThickness="0,0,0,1" Padding="32,10">
+                BorderThickness="0,0,0,1" Padding="32,10" >
             <DockPanel>
                 <TextBlock x:Name="txtSaudacao" Text="Olá, Ana Souza" FontSize="14"
                            VerticalAlignment="Center" Style="{StaticResource TextoSecundario}"/>
