@@ -125,6 +125,20 @@ namespace WPFGestaoDeEventos.Migrations
                     b.HasIndex("ParticipanteId");
 
                     b.ToTable("Inscricoes");
+
+                    b.HasData(
+                        new
+                        {
+                            InscricaoId = 1,
+                            EventoId = 1,
+                            ParticipanteId = 1
+                        },
+                        new
+                        {
+                            InscricaoId = 2,
+                            EventoId = 2,
+                            ParticipanteId = 1
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Local", b =>
@@ -150,10 +164,14 @@ namespace WPFGestaoDeEventos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<string>("País")
+                    b.Property<string>("Pais")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -164,6 +182,44 @@ namespace WPFGestaoDeEventos.Migrations
                     b.HasKey("LocalId");
 
                     b.ToTable("Locais");
+
+                    b.HasData(
+                        new
+                        {
+                            LocalId = 1,
+                            Bairro = "Centro",
+                            Capacidade = 100,
+                            Cidade = "Vila Velha",
+                            Estado = "ES",
+                            Nome = "Auditório UVV",
+                            Numero = 123,
+                            Pais = "Brasil",
+                            Rua = "Rua da UVV"
+                        },
+                        new
+                        {
+                            LocalId = 2,
+                            Bairro = "Praia do Canto",
+                            Capacidade = 300,
+                            Cidade = "Vitória",
+                            Estado = "ES",
+                            Nome = "Centro de Convenções",
+                            Numero = 456,
+                            Pais = "Brasil",
+                            Rua = "Av. Vitória"
+                        },
+                        new
+                        {
+                            LocalId = 3,
+                            Bairro = "Centro",
+                            Capacidade = 30,
+                            Cidade = "Vila Velha",
+                            Estado = "ES",
+                            Nome = "Lab 3 UVV",
+                            Numero = 123,
+                            Pais = "Brasil",
+                            Rua = "Rua da UVV"
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Organizador", b =>
@@ -231,6 +287,24 @@ namespace WPFGestaoDeEventos.Migrations
                         .HasFilter("[WorkshopId] IS NOT NULL");
 
                     b.ToTable("Palestras");
+
+                    b.HasData(
+                        new
+                        {
+                            PalestraId = 1,
+                            ConferenciaId = 2,
+                            Duracao = 3.0,
+                            Nome = "Fundamentos de C#",
+                            PalestranteId = 1
+                        },
+                        new
+                        {
+                            PalestraId = 2,
+                            ConferenciaId = 2,
+                            Duracao = 2.0,
+                            Nome = "EF Core na Prática",
+                            PalestranteId = 2
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Palestrante", b =>
@@ -256,6 +330,22 @@ namespace WPFGestaoDeEventos.Migrations
                     b.HasKey("PalestranteId");
 
                     b.ToTable("Palestrantes");
+
+                    b.HasData(
+                        new
+                        {
+                            PalestranteId = 1,
+                            CPF = "123.456.789-00",
+                            Email = "analima@email.com",
+                            Nome = "Ana Lima"
+                        },
+                        new
+                        {
+                            PalestranteId = 2,
+                            CPF = "987.654.321-00",
+                            Email = "brunoreis@email.com",
+                            Nome = "Bruno Reis"
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Participante", b =>
@@ -281,6 +371,15 @@ namespace WPFGestaoDeEventos.Migrations
                     b.HasKey("ParticipanteId");
 
                     b.ToTable("Participantes");
+
+                    b.HasData(
+                        new
+                        {
+                            ParticipanteId = 1,
+                            CPF = "123.456.789-00",
+                            Email = "anasouza@email.com",
+                            Nome = "Ana Souza"
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Conferencia", b =>
@@ -288,16 +387,64 @@ namespace WPFGestaoDeEventos.Migrations
                     b.HasBaseType("WPFGestaoDeEventos.Model.Evento");
 
                     b.HasDiscriminator().HasValue("Conferencia");
+
+                    b.HasData(
+                        new
+                        {
+                            EventoId = 2,
+                            DataEHora = new DateTime(2026, 11, 28, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Palestras sobre arquitetura de software, cloud e inteligência artificial.",
+                            Duracao = "8h",
+                            LocalId = 2,
+                            OrganizadorId = 1,
+                            QntInscricoes = 112,
+                            Status = "Disponível",
+                            Titulo = "Conferência Tech",
+                            VagasRestantes = 188,
+                            Valor = 120.0
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Workshop", b =>
                 {
                     b.HasBaseType("WPFGestaoDeEventos.Model.Evento");
 
-                    b.Property<int>("idPalestra")
+                    b.Property<int>("PalestraId")
                         .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Workshop");
+
+                    b.HasData(
+                        new
+                        {
+                            EventoId = 1,
+                            DataEHora = new DateTime(2026, 11, 20, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Desenvolvimento desktop prático com WPF e Entity Framework Core.",
+                            Duracao = "3h",
+                            LocalId = 1,
+                            OrganizadorId = 1,
+                            QntInscricoes = 25,
+                            Status = "Disponível",
+                            Titulo = "Workshop de C#",
+                            VagasRestantes = 15,
+                            Valor = 50.0,
+                            PalestraId = 1
+                        },
+                        new
+                        {
+                            EventoId = 3,
+                            DataEHora = new DateTime(2026, 12, 2, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Prototipação de interfaces e experiência do usuário.",
+                            Duracao = "2h",
+                            LocalId = 3,
+                            OrganizadorId = 1,
+                            QntInscricoes = 30,
+                            Status = "Disponível",
+                            Titulo = "Workshop de UX",
+                            VagasRestantes = 0,
+                            Valor = 0.0,
+                            PalestraId = 0
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Empresa", b =>
@@ -313,6 +460,16 @@ namespace WPFGestaoDeEventos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Empresa");
+
+                    b.HasData(
+                        new
+                        {
+                            OrganizadorId = 1,
+                            Email = "contato@uvveventos.com.br",
+                            Numero = "27999998888",
+                            CNPJ = "12.345.678/0001-90",
+                            RazaoSocial = "UVV"
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.PessoaFisica", b =>
@@ -328,6 +485,16 @@ namespace WPFGestaoDeEventos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("PessoaFisica");
+
+                    b.HasData(
+                        new
+                        {
+                            OrganizadorId = 2,
+                            Email = "contato@uvveventos.com.br",
+                            Numero = "27999998888",
+                            CPF = "123.456.789-00",
+                            Nome = "Júnior da Costa"
+                        });
                 });
 
             modelBuilder.Entity("WPFGestaoDeEventos.Model.Certificado", b =>
