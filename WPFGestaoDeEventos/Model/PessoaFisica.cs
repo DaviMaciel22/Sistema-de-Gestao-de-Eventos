@@ -1,7 +1,11 @@
-namespace WPFGestaoDeEventos.Model
+namespace WPFGestaoDeEventos.Model;
+
+public class PessoaFisica : Organizador
 {
-    public class PessoaFisica : Organizador
+    public string CPF { get; set; } = string.Empty;
+
+    public override string ToString()
     {
-        public string Cpf { get; set; } = string.Empty;
+        return $"ID: {IdOrganizador} / Nome: {Nome} / Número: {Numero} / Email: {Email} / CPF: {CPF}";
     }
 }

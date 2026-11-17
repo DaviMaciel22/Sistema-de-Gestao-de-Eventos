@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFGestaoDeEventos
+namespace WPFGestaoDeEventos.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,6 +38,10 @@ namespace WPFGestaoDeEventos
             AreaPrincipal.Content = new WPFGestaoDeEventos.View.Perfil();
         }
 
+        private void TelaInicial_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

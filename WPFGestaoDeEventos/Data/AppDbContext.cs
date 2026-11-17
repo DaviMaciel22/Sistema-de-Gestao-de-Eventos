@@ -17,8 +17,9 @@ namespace WPFGestaoDeEventos.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Banco SQLite em arquivo, criado na pasta de execução do app
-            optionsBuilder.UseSqlite("Data Source=gestaoeventos.db");
+            // SQL Server LocalDB (vem com o Visual Studio), como descrito no README
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\MSSQLLocalDB;Database=GestaoEventos;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +35,7 @@ namespace WPFGestaoDeEventos.Data
 
                 // Agregação: o Local continua existindo se o evento for removido
                 evento.HasOne(e => e.Local)
-                    .WithMany()
+                    .WithMany(l => l.Eventos)
                     .HasForeignKey(e => e.LocalId)
                     .OnDelete(DeleteBehavior.Restrict);
 
@@ -69,14 +70,15 @@ namespace WPFGestaoDeEventos.Data
 
             modelBuilder.Entity<Local>().HasKey(l => l.IdLocal);
 
-            // NxN: Palestra <-> Palestrante (tabela de junção PalestraPalestrante)
             modelBuilder.Entity<Palestra>(palestra =>
             {
                 palestra.HasKey(p => p.IdPalestra);
 
-                palestra.HasMany(p => p.Palestrantes)
+                // 1xN: Palestrante -> Palestra
+                palestra.HasOne(p => p.Palestrante)
                     .WithMany(p => p.Palestras)
-                    .UsingEntity(juncao => juncao.ToTable("PalestraPalestrante"));
+                    .HasForeignKey(p => p.PalestranteId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Palestrante>().HasKey(p => p.IdPalestrante);
@@ -84,9 +86,11 @@ namespace WPFGestaoDeEventos.Data
             modelBuilder.Entity<Participante>(participante =>
             {
                 participante.HasKey(p => p.IdParticipante);
+                participante.Property(p => p.Email).HasMaxLength(200);
                 participante.HasIndex(p => p.Email).IsUnique();
             });
 
+            // NxN: Participante <-> Evento, resolvido pela classe de associação Inscricao
             modelBuilder.Entity<Inscricao>(inscricao =>
             {
                 inscricao.HasKey(i => i.IdInscricao);
@@ -142,12 +146,36 @@ namespace WPFGestaoDeEventos.Data
                 Nome = "UVV",
                 Numero = "(27) 3000-0000",
                 Email = "eventos@uvv.br",
-                Cnpj = "00.000.000/0001-00"
+                CNPJ = "00.000.000/0001-00",
+                RazaoSocial = "Universidade Vila Velha"
             };
 
-            var auditorio = new Local { Nome = "Auditório UVV", Cidade = "Vila Velha", Estado = "ES" };
-            var centro = new Local { Nome = "Centro de Convenções", Cidade = "Vitória", Estado = "ES" };
-            var lab3 = new Local { Nome = "Lab 3 UVV", Cidade = "Vila Velha", Estado = "ES" };
+            var auditorio = new Local
+            {
+                Nome = "Auditório UVV",
+                Capacidade = 300,
+                Cidade = "Vila Velha",
+                Estado = "ES",
+                Pais = "Brasil"
+            };
+
+            var centro = new Local
+            {
+                Nome = "Centro de Convenções",
+                Capacidade = 1000,
+                Cidade = "Vitória",
+                Estado = "ES",
+                Pais = "Brasil"
+            };
+
+            var lab3 = new Local
+            {
+                Nome = "Lab 3 UVV",
+                Capacidade = 40,
+                Cidade = "Vila Velha",
+                Estado = "ES",
+                Pais = "Brasil"
+            };
 
             var workshopCSharp = new Workshop
             {
@@ -199,38 +227,40 @@ namespace WPFGestaoDeEventos.Data
             uvv.CriarEvento(workshopUx);
             uvv.CriarEvento(semanaTi);
 
-            var anaLima = new Palestrante { Nome = "Ana Lima" };
-            var brunoReis = new Palestrante { Nome = "Bruno Reis" };
+            var anaLima = new Palestrante { Nome = "Ana Lima", CPF = "333.333.333-33", Email = "ana.lima@email.com" };
+            var brunoReis = new Palestrante { Nome = "Bruno Reis", CPF = "444.444.444-44", Email = "bruno.reis@email.com" };
 
             var fundamentos = new Palestra
             {
                 Titulo = "Fundamentos de C#",
-                Horario = new DateTime(2026, 11, 20, 19, 0, 0),
+                DataEHora = new DateTime(2026, 11, 20, 19, 0, 0),
+                Duracao = 1.5,
                 Evento = workshopCSharp,
-                Palestrantes = { anaLima }
+                Palestrante = anaLima
             };
 
             var efCore = new Palestra
             {
                 Titulo = "EF Core na prática",
-                Horario = new DateTime(2026, 11, 20, 20, 30, 0),
+                DataEHora = new DateTime(2026, 11, 20, 20, 30, 0),
+                Duracao = 1.5,
                 Evento = workshopCSharp,
-                Palestrantes = { brunoReis }
+                Palestrante = brunoReis
             };
 
-            // Palestra com dois palestrantes (exemplo do NxN)
             var ia = new Palestra
             {
                 Titulo = "IA aplicada ao desenvolvimento",
-                Horario = new DateTime(2026, 11, 28, 10, 0, 0),
+                DataEHora = new DateTime(2026, 11, 28, 10, 0, 0),
+                Duracao = 2,
                 Evento = conferenciaTech,
-                Palestrantes = { anaLima, brunoReis }
+                Palestrante = anaLima
             };
 
-            var ana = new Participante { Nome = "Ana Souza", Email = "ana.souza@email.com" };
+            var ana = new Participante { Nome = "Ana Souza", CPF = "111.111.111-11", Email = "ana.souza@email.com" };
             ana.DefinirSenha("123456");
 
-            var carlos = new Participante { Nome = "Carlos Lima", Email = "carlos.lima@email.com" };
+            var carlos = new Participante { Nome = "Carlos Lima", CPF = "222.222.222-22", Email = "carlos.lima@email.com" };
             carlos.DefinirSenha("123456");
 
             var inscricaoCSharp = new Inscricao

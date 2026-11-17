@@ -1,16 +1,22 @@
-namespace WPFGestaoDeEventos.Model
+namespace WPFGestaoDeEventos.Model;
+
+public class Palestra
 {
-    public class Palestra
+    public int IdPalestra { get; set; }
+    public string Titulo { get; set; } = string.Empty;
+    public DateTime DataEHora { get; set; }
+    public double Duracao { get; set; }
+
+    // Composição: a palestra pertence a um evento
+    public int EventoId { get; set; }
+    public Evento Evento { get; set; } = null!;
+
+    // 1xN: um palestrante pode dar várias palestras
+    public int PalestranteId { get; set; }
+    public Palestrante Palestrante { get; set; } = null!;
+
+    public override string ToString()
     {
-        public int IdPalestra { get; set; }
-        public string Titulo { get; set; } = string.Empty;
-        public DateTime Horario { get; set; }
-
-        // Composição: pertence a um evento
-        public int EventoId { get; set; }
-        public Evento Evento { get; set; } = null!;
-
-        // NxN: uma palestra tem vários palestrantes e um palestrante dá várias palestras
-        public ICollection<Palestrante> Palestrantes { get; set; } = new List<Palestrante>();
+        return $"ID: {IdPalestra} / Título: {Titulo} / Palestrante: {Palestrante?.Nome} / Evento: {Evento?.Titulo} / Duração: {Duracao}";
     }
 }

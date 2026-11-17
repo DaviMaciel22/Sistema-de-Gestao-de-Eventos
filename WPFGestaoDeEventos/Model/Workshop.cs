@@ -1,7 +1,6 @@
-namespace WPFGestaoDeEventos.Model
+namespace WPFGestaoDeEventos.Model;
+
+public class Workshop : Evento
 {
-    public class Workshop : Evento
-    {
-        public override string NomeTipo => "Workshop";
-    }
+    public override string TipoEvento => "Workshop";
 }

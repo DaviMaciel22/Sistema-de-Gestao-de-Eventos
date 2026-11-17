@@ -1,7 +1,11 @@
-namespace WPFGestaoDeEventos.Model
+namespace WPFGestaoDeEventos.Model;
+
+public class Conferencia : Evento
 {
-    public class Conferencia : Evento
+    public override string TipoEvento => "Conferência";
+
+    public override string ToString()
     {
-        public override string NomeTipo => "Conferência";
+        return base.ToString() + $" / Quantidade de Palestras: {QtdPalestras}";
     }
 }

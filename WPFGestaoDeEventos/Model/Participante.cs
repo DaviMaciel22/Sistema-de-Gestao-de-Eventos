@@ -1,32 +1,37 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace WPFGestaoDeEventos.Model
+namespace WPFGestaoDeEventos.Model;
+
+public class Participante
 {
-    public class Participante
+    public int IdParticipante { get; set; }
+    public string Nome { get; set; } = string.Empty;
+    public string CPF { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+    public string SenhaHash { get; set; } = string.Empty;
+
+    // 1xN: um participante tem várias inscrições
+    public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
+
+    public static string GerarHash(string senha)
     {
-        public int IdParticipante { get; set; }
-        public string Nome { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string SenhaHash { get; set; } = string.Empty;
+        byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(senha));
+        return Convert.ToHexString(bytes);
+    }
 
-        // 1xN: um participante tem várias inscrições
-        public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
+    public void DefinirSenha(string senha)
+    {
+        SenhaHash = GerarHash(senha);
+    }
 
-        public static string GerarHash(string senha)
-        {
-            byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(senha));
-            return Convert.ToHexString(bytes);
-        }
+    public bool SenhaConfere(string senha)
+    {
+        return SenhaHash == GerarHash(senha);
+    }
 
-        public void DefinirSenha(string senha)
-        {
-            SenhaHash = GerarHash(senha);
-        }
-
-        public bool SenhaConfere(string senha)
-        {
-            return SenhaHash == GerarHash(senha);
-        }
+    public override string ToString()
+    {
+        return $"ID: {IdParticipante} / Nome: {Nome} / CPF: {CPF} / Email: {Email}";
     }
 }
