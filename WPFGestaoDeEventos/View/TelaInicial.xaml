@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="WPFGestaoDeEventos.View.TelaInicial"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="UserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -43,8 +44,12 @@
                 </ComboBox>
             </StackPanel>
             <Button x:Name="btnFiltrar" Grid.Column="4" Content="Filtrar" Height="34" Margin="16,0,0,0"
-                    VerticalAlignment="Bottom" Style="{StaticResource BotaoPrincipal}"/>
+                    VerticalAlignment="Bottom" Style="{StaticResource BotaoPrincipal}"
+                    Click="BtnFiltrar_Click"/>
         </Grid>
+
+        <TextBlock x:Name="lblSemEventos" Grid.Row="2" Text="Nenhum evento encontrado."
+                   Style="{StaticResource TextoSecundario}" Visibility="Collapsed"/>
 
         <!-- Cards de evento: a lista rola para baixo (sem carrossel) -->
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -73,7 +78,7 @@
                                 </TextBlock>
 
                                 <!-- Sem vagas, o mesmo botão vira "Esgotado" e fica desabilitado -->
-                                <Button Margin="0,16,0,0">
+                                <Button Margin="0,16,0,0" Tag="{Binding IdEvento}" Click="BtnGarantirIngresso_Click">
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource BotaoPrincipal}">
                                             <Setter Property="Content" Value="Garantir ingresso"/>
