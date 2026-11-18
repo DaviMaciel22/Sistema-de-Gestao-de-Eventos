@@ -21,7 +21,7 @@ public class Palestra
 
     public override string ToString()
     {
-        return $"ID: {PalestraId} / Palestrante: {Palestrante.Nome} / Workshop: {Workshop?.Titulo ?? "N/A"} " +
+        return $"ID: {PalestraId} / Palestrante: {Palestrante?.Nome} / Workshop: {Workshop?.Titulo ?? "N/A"} " +
             $"/ Conferência: {Conferencia?.Titulo ?? "N/A"} / Duração: {Duracao}";
     }
 }

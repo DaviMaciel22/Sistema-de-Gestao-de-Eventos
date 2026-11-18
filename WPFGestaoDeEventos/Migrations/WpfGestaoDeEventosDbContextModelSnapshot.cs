@@ -118,6 +118,10 @@ namespace WPFGestaoDeEventos.Migrations
                     b.Property<int>("ParticipanteId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("InscricaoId");
 
                     b.HasIndex("EventoId");
@@ -131,13 +135,15 @@ namespace WPFGestaoDeEventos.Migrations
                         {
                             InscricaoId = 1,
                             EventoId = 1,
-                            ParticipanteId = 1
+                            ParticipanteId = 1,
+                            Status = "Confirmado"
                         },
                         new
                         {
                             InscricaoId = 2,
                             EventoId = 2,
-                            ParticipanteId = 1
+                            ParticipanteId = 1,
+                            Status = "Confirmado"
                         });
                 });
 
@@ -368,6 +374,10 @@ namespace WPFGestaoDeEventos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SenhaHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ParticipanteId");
 
                     b.ToTable("Participantes");
@@ -378,7 +388,8 @@ namespace WPFGestaoDeEventos.Migrations
                             ParticipanteId = 1,
                             CPF = "123.456.789-00",
                             Email = "anasouza@email.com",
-                            Nome = "Ana Souza"
+                            Nome = "Ana Souza",
+                            SenhaHash = "8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92"
                         });
                 });
 

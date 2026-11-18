@@ -73,11 +73,11 @@
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,0,0,16">
             <StackPanel Width="380">
                 <TextBlock x:Name="lblBuscarMeusIngressos" Text="Buscar" Style="{StaticResource Rotulo}"/>
-                <TextBox x:Name="txtBuscar" ToolTip="Nome do evento"/>
+                <TextBox x:Name="txtBuscar" ToolTip="Nome do evento" TextChanged="TxtBuscar_TextChanged"/>
             </StackPanel>
             <StackPanel Width="200" Margin="24,0,0,0">
                 <TextBlock x:Name="lblStatusMeusIngressos" Text="Status" Style="{StaticResource Rotulo}"/>
-                <ComboBox x:Name="cbStatus" SelectedIndex="0">
+                <ComboBox x:Name="cbStatus" SelectedIndex="0" SelectionChanged="CbStatus_SelectionChanged">
                     <ComboBoxItem Content="Todos"/>
                     <ComboBoxItem Content="Confirmado"/>
                     <ComboBoxItem Content="Cancelado"/>
@@ -90,7 +90,8 @@
         <Border Grid.Row="2" Style="{StaticResource Cartao}" Padding="12,12,12,4">
             <ListBox x:Name="lbIngressos" BorderThickness="0" Background="Transparent"
                      ItemContainerStyle="{StaticResource ItemIngresso}"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     SelectionChanged="LbIngressos_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -114,11 +115,11 @@
         <Border x:Name="FundoEvento" Grid.Row="2" Grid.Column="2" Style="{StaticResource Cartao}" Padding="24">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,25,0,0">
-                    <Button x:Name="btnCancelar" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}"
+                    <Button x:Name="btnCancelar" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}" Click="BtnCancelar_Click"
                             VerticalAlignment="Top"/>
                     <StackPanel Margin="16,0,0,0">
                         <Button x:Name="btnCertificado" Content="Ver certificado"
-                                Style="{StaticResource BotaoSecundario}" IsEnabled="False"/>
+                                Style="{StaticResource BotaoSecundario}" IsEnabled="False" Click="BtnCertificado_Click"/>
                         <TextBlock x:Name="lblAviso" Text="(só depois do check-in)" FontSize="11"
                                    Style="{StaticResource TextoSecundario}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
                     </StackPanel>
@@ -148,8 +149,8 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="0,0,0,2">
-                                    <Run Text="•  "/><Run Text="{Binding DataEHora, StringFormat=HH:mm}" Foreground="{StaticResource CorPrincipal}"/>
-                                    <Run Text="{Binding Titulo}"/><Run Text=" — "/><Run Text="{Binding Palestrante.Nome}"/>
+                                    <Run Text="•  "/><Run Text="{Binding Duracao, StringFormat={}{0}h}" Foreground="{StaticResource CorPrincipal}"/>
+                                    <Run Text="{Binding Nome}"/><Run Text=" — "/><Run Text="{Binding Palestrante.Nome}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

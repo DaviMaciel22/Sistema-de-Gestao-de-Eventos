@@ -1,19 +1,28 @@
-﻿using WPFGestaoDeEventos.Model;
+using WPFGestaoDeEventos.Model;
+using WPFGestaoDeEventos.Repository;
 
 namespace WPFGestaoDeEventos.Controller
 {
     public class EventoController
     {
+        private readonly EventoRepository _repositorio = new();
+
         // Home: ao abrir a tela
         public List<Evento> ListarDisponiveis()
         {
-            throw new NotImplementedException();
+            return _repositorio.ListarDisponiveis();
         }
 
-        // Home: botão Filtrar (candidata à função via SQL)
+        // Home: preenche o filtro de cidade
+        public List<string> ListarCidades()
+        {
+            return _repositorio.ListarCidades();
+        }
+
+        // Home: botão Filtrar (consulta SQL parametrizada no repositório)
         public List<Evento> Buscar(string? nome, DateTime? data, string? cidade, string? tipo)
         {
-            throw new NotImplementedException();
+            return _repositorio.Buscar(nome, data, cidade, tipo);
         }
     }
 }

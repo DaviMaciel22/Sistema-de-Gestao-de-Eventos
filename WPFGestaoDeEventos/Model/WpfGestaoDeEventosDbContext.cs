@@ -231,7 +231,9 @@ namespace WPFGestaoDeEventos.Model
                     ParticipanteId = 1,
                     Nome = "Ana Souza",
                     CPF = "123.456.789-00",
-                    Email = "anasouza@email.com"
+                    Email = "anasouza@email.com",
+                    // senha de teste: 123456
+                    SenhaHash = "8D969EEF6ECAD3C29A3A629280E686CF0C3F5D5A86AFF3CA12020C923ADC6C92"
                 }
             );
 

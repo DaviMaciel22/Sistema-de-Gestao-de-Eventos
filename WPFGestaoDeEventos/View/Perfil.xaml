@@ -40,7 +40,7 @@
                 <TextBlock x:Name="lblEmail" Text="E-mail" Style="{StaticResource Rotulo}"/>
                 <TextBox x:Name="txtEmail" Margin="0,0,0,24"/>
 
-                <Button x:Name="btnSalvar" Content="Salvar alterações"
+                <Button x:Name="btnSalvar" Content="Salvar alterações" Click="BtnSalvar_Click"
                         Style="{StaticResource BotaoPrincipal}" HorizontalAlignment="Left"/>
             </StackPanel>
         </Grid>
@@ -60,7 +60,7 @@
                 <TextBlock x:Name="lblConfirmarNovaSenha" Text="Confirmar nova senha" Style="{StaticResource Rotulo}"/>
                 <PasswordBox x:Name="pbConfirmacao" Margin="0,0,0,20"/>
 
-                <Button x:Name="btnAlterarSenha" Content="Alterar senha"
+                <Button x:Name="btnAlterarSenha" Content="Alterar senha" Click="BtnAlterarSenha_Click"
                         Style="{StaticResource BotaoSecundario}" HorizontalAlignment="Right"/>
             </StackPanel>
         </Border>
@@ -69,7 +69,7 @@
         <StackPanel Grid.Row="3" Grid.ColumnSpan="3" Margin="0,24,0,0">
             <Rectangle Height="1" Stroke="{StaticResource CorCancelado}" StrokeDashArray="6 4" Margin="0,0,0,16"/>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="btnExcluirConta" Content="Excluir conta" Style="{StaticResource BotaoPerigo}"/>
+                <Button x:Name="btnExcluirConta" Content="Excluir conta" Style="{StaticResource BotaoPerigo}" Click="BtnExcluirConta_Click"/>
                 <TextBlock x:Name="lblAvisoMeuPerfil" Text="Pede confirmação. Não é possível excluir com ingresso confirmado."
                            Style="{StaticResource TextoSecundario}" VerticalAlignment="Center" Margin="16,0,0,0"/>
             </StackPanel>
