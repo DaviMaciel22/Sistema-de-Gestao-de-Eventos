@@ -91,89 +91,37 @@
         </ScrollViewer>
         <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,16,0,0">
             <Border x:Name="FundoEvento1" Grid.Row="2" Style="{StaticResource Cartao}" Padding="24" Height="327" Width="317" Margin="0,0,20,0" Background="White" CornerRadius="8">
-                    <DockPanel>
-                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,25,0,0">
-                            <Button x:Name="btnCancelar" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}"
-                    VerticalAlignment="Top"/>
-                            <StackPanel Margin="16,0,0,0">
-                                <Button x:Name="btnCertificado" Content="Ver certificado"
-                        Style="{StaticResource BotaoSecundario}" IsEnabled="False"/>
-                                <TextBlock x:Name="lblAviso" Text="(só depois do check-in)" FontSize="11"
-                        Style="{StaticResource TextoSecundario}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel>
-                            <TextBlock x:Name="txtTituloEvento" Text="Selecione um ingresso"
-                    FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,16"/>
-
-                            <WrapPanel Margin="0,0,0,6">
-                                <TextBlock x:Name="lblDataEHoraEvento" Margin="0,0,32,0"><Run Foreground="#FF64748B" Text="Data"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="E"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="Hora"/><Run Foreground="#FF64748B" Text=": "/><Run x:Name="runData"/></TextBlock>
-                                <TextBlock x:Name="lblTipoEvento" RenderTransformOrigin="0.477,0.512"><Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo"/></TextBlock>
-                            </WrapPanel>
-                            <TextBlock x:Name="lblDuracao" Margin="0,0,0,6"><Run Text="Duração: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDuração"/></TextBlock>
-                            <TextBlock x:Name="lblLocal" Margin="0,0,0,6"><Run Text="Local: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runLocal"/></TextBlock>
-                            <TextBlock x:Name="lblDescricao" TextWrapping="Wrap" Margin="0,0,0,16"><Run Text="Descrição: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDescricao"/></TextBlock>
-
-                            <!-- Palestras: composição Evento → Palestra -->
-                            <TextBlock x:Name="lblPalestras" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"><Run Text="Palestras"/><Run Language="pt-br" Text=":"/></TextBlock>
-                            <ItemsControl x:Name="icPalestras" Margin="12,0,0,16">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Margin="0,0,0,2"><Run Text="•  "/><Run Text="{Binding DataEHora, StringFormat=HH:mm}" Foreground="{StaticResource CorPrincipal}"/><Run Text=" "/><Run Text="{Binding Titulo}"/><Run Text=" — "/><Run Text="{Binding Palestrante.Nome}"/></TextBlock>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                            <WrapPanel>
-                                <TextBlock x:Name="lblCodigoDoIngresso" Margin="0,0,32,0"><Run Text="Código do ingresso: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runCodigo"/></TextBlock>
-                                <TextBlock x:Name="lblStatusMeusIngressos1"><Run Text="Status: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runStatus"/></TextBlock>
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
+                <DockPanel>
+                    <Button x:Name="btnGarantirIngresso1" DockPanel.Dock="Bottom" Content="Garantir ingresso"
+                            Style="{StaticResource BotaoPrincipal}" Margin="0,16,0,0"/>
+                    <StackPanel>
+                        <Border Style="{StaticResource Etiqueta}">
+                            <TextBlock x:Name="txtTipoEvento1" Text="Workshop"/>
+                        </Border>
+                        <TextBlock x:Name="txtTituloEvento1" Text="Workshop de C#" FontSize="18" FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis" Margin="0,10,0,6"/>
+                        <TextBlock x:Name="txtDataEvento1" Text="20/11/2026 · 19:00" Style="{StaticResource TextoSecundario}" Margin="0,0,0,2"/>
+                        <TextBlock x:Name="txtLocalEvento1" Text="Auditório UVV · Vila Velha" Style="{StaticResource TextoSecundario}" Margin="0,0,0,2"/>
+                        <TextBlock x:Name="txtPrecoVagas1" Text="R$ 50,00 · 15 vagas" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </DockPanel>
                 </Border>
 
             <Border x:Name="FundoEvento2" Grid.Row="2" Style="{StaticResource Cartao}" Padding="24" Height="327" Width="317" Margin="0,0,20,0" Background="White" CornerRadius="8">
-                    <DockPanel>
-                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0,25,0,0">
-                            <Button x:Name="btnCancelar1" Content="Cancelar ingresso" Style="{StaticResource BotaoPerigo}"
-                VerticalAlignment="Top"/>
-                            <StackPanel Margin="16,0,0,0">
-                                <Button x:Name="btnCertificado1" Content="Ver certificado"
-                    Style="{StaticResource BotaoSecundario}" IsEnabled="False"/>
-                                <TextBlock x:Name="lblAviso1" Text="(só depois do check-in)" FontSize="11"
-                    Style="{StaticResource TextoSecundario}" HorizontalAlignment="Center" Margin="0,4,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel>
-                            <TextBlock x:Name="txtTituloEvento1" Text="Selecione um ingresso"
-                FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,16"/>
-
-                            <WrapPanel Margin="0,0,0,6">
-                                <TextBlock x:Name="lblDataEHoraEvento1" Margin="0,0,32,0"><Run Foreground="#FF64748B" Text="Data"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="E"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="Hora"/><Run Foreground="#FF64748B" Text=": "/><Run x:Name="runData1"/></TextBlock>
-                                <TextBlock x:Name="lblTipoEvento1" RenderTransformOrigin="0.477,0.512"><Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo1"/></TextBlock>
-                            </WrapPanel>
-                            <TextBlock x:Name="lblDuracao1" Margin="0,0,0,6"><Run Text="Duração: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDuração1"/></TextBlock>
-                            <TextBlock x:Name="lblLocal1" Margin="0,0,0,6"><Run Text="Local: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runLocal1"/></TextBlock>
-                            <TextBlock x:Name="lblDescricao1" TextWrapping="Wrap" Margin="0,0,0,16"><Run Text="Descrição: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runDescricao1"/></TextBlock>
-
-                            <!-- Palestras: composição Evento → Palestra -->
-                            <TextBlock x:Name="lblPalestras1" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"><Run Text="Palestras"/><Run Language="pt-br" Text=":"/></TextBlock>
-                            <ItemsControl x:Name="icPalestras1" Margin="12,0,0,16">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Margin="0,0,0,2"><Run Text="•  "/><Run Text="{Binding DataEHora, StringFormat=HH:mm}" Foreground="{StaticResource CorPrincipal}"/><Run Text=" "/><Run Text="{Binding Titulo}"/><Run Text=" — "/><Run Text="{Binding Palestrante.Nome}"/></TextBlock>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                            <WrapPanel>
-                                <TextBlock x:Name="lblCodigoDoIngresso1" Margin="0,0,32,0"><Run Text="Código do ingresso: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runCodigo1"/></TextBlock>
-                                <TextBlock x:Name="lblStatusMeusIngressos2"><Run Text="Status: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runStatus1"/></TextBlock>
-                            </WrapPanel>
-                        </StackPanel>
-                    </DockPanel>
+                <DockPanel>
+                    <Button x:Name="btnGarantirIngresso2" DockPanel.Dock="Bottom" Content="Garantir ingresso"
+                            Style="{StaticResource BotaoPrincipal}" Margin="0,16,0,0"/>
+                    <StackPanel>
+                        <Border Style="{StaticResource Etiqueta}">
+                            <TextBlock x:Name="txtTipoEvento2" Text="Conferência"/>
+                        </Border>
+                        <TextBlock x:Name="txtTituloEvento2" Text="Conferência Tech" FontSize="18" FontWeight="SemiBold"
+                                   TextTrimming="CharacterEllipsis" Margin="0,10,0,6"/>
+                        <TextBlock x:Name="txtDataEvento2" Text="28/11/2026 · 09:00" Style="{StaticResource TextoSecundario}" Margin="0,0,0,2"/>
+                        <TextBlock x:Name="txtLocalEvento2" Text="Centro de Convenções · Vitória" Style="{StaticResource TextoSecundario}" Margin="0,0,0,2"/>
+                        <TextBlock x:Name="txtPrecoVagas2" Text="R$ 120,00 · 188 vagas" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </DockPanel>
                 </Border>
         </WrapPanel>
 
