@@ -2,6 +2,7 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Composição: as palestras fazem parte da conferência e não existem sem ela
 public class Conferencia : Evento
 {
     public ICollection<Palestra> Palestras { get; set; } = new List<Palestra>();

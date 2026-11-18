@@ -2,12 +2,13 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Relação N:N: Participante e Evento se ligam por meio da Inscricao
 public class Inscricao
 {
     public int InscricaoId { get; set; }
 
     // Confirmado, Cancelado ou Utilizado
-    public string Status { get; set; } = "Confirmado";
+    public string Status { get; set; } = StatusInscricao.Confirmado;
 
     public int EventoId { get; set; }
     public Evento Evento { get; set; } = null!;

@@ -18,7 +18,7 @@
         <Border Background="{StaticResource CorCartao}" BorderBrush="{StaticResource CorBorda}"
                 BorderThickness="0,0,0,1" Padding="32,10" >
             <DockPanel>
-                <TextBlock x:Name="txtSaudacao" Text="Olá, Ana Souza" FontSize="14"
+                <TextBlock x:Name="txtSaudacao" Text="Olá" FontSize="14"
                            VerticalAlignment="Center" Style="{StaticResource TextoSecundario}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <RadioButton x:Name="rbHome" Content="Home" IsChecked="True"

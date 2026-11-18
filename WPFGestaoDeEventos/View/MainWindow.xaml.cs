@@ -1,47 +1,49 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using WPFGestaoDeEventos.Controller;
 
 namespace WPFGestaoDeEventos.View
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    // MVC: a janela principal só troca as telas e mostra o nome de quem está usando o app
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-
             InitializeComponent();
+            Loaded += (s, e) => CarregarSaudacao();
+        }
+
+        // Chamado pelo Perfil depois de salvar, para o nome lá em cima mudar na hora
+        public void AtualizarSaudacao(string nome)
+        {
+            txtSaudacao.Text = $"Olá, {nome}";
+        }
+
+        private void CarregarSaudacao()
+        {
+            try
+            {
+                AtualizarSaudacao(new ParticipanteController().ObterAtual().Nome);
+            }
+            catch (Exception)
+            {
+                // Se o banco falhar, a Home já mostra o erro; aqui fica só "Olá"
+                txtSaudacao.Text = "Olá";
+            }
         }
 
         private void BtnEventos_Click(object sender, RoutedEventArgs e)
         {
-            // Instancia a Tela Inicial e a joga para dentro da área principal
-            AreaPrincipal.Content = new WPFGestaoDeEventos.View.TelaInicial();
+            AreaPrincipal.Content = new TelaInicial();
         }
 
         private void BtnIngressos_Click(object sender, RoutedEventArgs e)
         {
-            AreaPrincipal.Content = new WPFGestaoDeEventos.View.MeusIngressos();
+            AreaPrincipal.Content = new MeusIngressos();
         }
 
         private void BtnPerfil_Click(object sender, RoutedEventArgs e)
         {
-            AreaPrincipal.Content = new WPFGestaoDeEventos.View.Perfil();
-        }
-
-        private void TelaInicial_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            AreaPrincipal.Content = new Perfil();
         }
     }
 }
-

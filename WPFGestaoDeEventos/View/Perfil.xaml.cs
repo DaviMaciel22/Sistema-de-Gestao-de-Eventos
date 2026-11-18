@@ -4,10 +4,7 @@ using WPFGestaoDeEventos.Controller;
 
 namespace WPFGestaoDeEventos.View
 {
-    /// <summary>
-    /// Interação lógica para Perfil.xam
-    /// O code-behind só repassa os eventos para o controller.
-    /// </summary>
+    // MVC: a View só lê os campos, chama o controller e mostra o resultado
     public partial class Perfil : UserControl
     {
         private readonly ParticipanteController _controller = new();
@@ -38,7 +35,9 @@ namespace WPFGestaoDeEventos.View
             try
             {
                 _controller.AtualizarDados(txtNome.Text, txtEmail.Text);
-                txtIniciais.Text = Iniciais(txtNome.Text);
+                string nome = txtNome.Text.Trim();
+                txtIniciais.Text = Iniciais(nome);
+                (Window.GetWindow(this) as MainWindow)?.AtualizarSaudacao(nome);
                 MessageBox.Show("Dados atualizados.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (InvalidOperationException ex)
@@ -56,10 +55,6 @@ namespace WPFGestaoDeEventos.View
             try
             {
                 _controller.AlterarSenha(pbSenhaAtual.Password, pbNovaSenha.Password, pbConfirmacao.Password);
-
-                pbSenhaAtual.Clear();
-                pbNovaSenha.Clear();
-                pbConfirmacao.Clear();
                 MessageBox.Show("Senha alterada.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (InvalidOperationException ex)
@@ -69,6 +64,13 @@ namespace WPFGestaoDeEventos.View
             catch (Exception ex)
             {
                 MostrarErro(ex);
+            }
+            finally
+            {
+                // Limpa as senhas sempre, dando certo ou não
+                pbSenhaAtual.Clear();
+                pbNovaSenha.Clear();
+                pbConfirmacao.Clear();
             }
         }
 

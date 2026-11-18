@@ -1,13 +1,12 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WPFGestaoDeEventos.Model;
 
 namespace WPFGestaoDeEventos.Repository
 {
-    // Acesso ao banco para os eventos da Home.
-    // O método Buscar é a funcionalidade escrita em SQL (parametrizada) exigida no trabalho.
-    internal class EventoRepository
+    // SOLID (SRP): esta classe só conversa com o banco sobre eventos
+    // Aqui cada método abre e fecha o contexto, para a Home sempre ver as vagas atualizadas
+    public class EventoRepository : IEventoRepository
     {
-        private const string StatusDisponivel = "Disponível";
 
         public List<Evento> ListarDisponiveis()
         {
@@ -15,7 +14,7 @@ namespace WPFGestaoDeEventos.Repository
 
             return contexto.Eventos
                 .Include(e => e.Local)
-                .Where(e => e.Status == StatusDisponivel && e.DataEHora >= DateTime.Now)
+                .Where(e => e.Status == StatusEvento.Disponivel && e.DataEHora >= DateTime.Now)
                 .OrderBy(e => e.DataEHora)
                 .ToList();
         }
@@ -31,6 +30,7 @@ namespace WPFGestaoDeEventos.Repository
                 .ToList();
         }
 
+        // Funcionalidade via SQL: busca da Home com parâmetros ({0}, {1}...), nunca juntando o texto do usuário no SQL
         // tipo: "Workshop", "Conferencia" ou null (todos). É o valor da coluna Discriminator.
         public List<Evento> Buscar(string? nome, DateTime? data, string? cidade, string? tipo)
         {
@@ -38,7 +38,7 @@ namespace WPFGestaoDeEventos.Repository
 
             var sql = new System.Text.StringBuilder(
                 "SELECT e.* FROM Eventos e INNER JOIN Locais l ON e.LocalId = l.LocalId WHERE e.Status = {0}");
-            var parametros = new List<object> { StatusDisponivel };
+            var parametros = new List<object> { StatusEvento.Disponivel };
 
             if (!string.IsNullOrWhiteSpace(nome))
             {

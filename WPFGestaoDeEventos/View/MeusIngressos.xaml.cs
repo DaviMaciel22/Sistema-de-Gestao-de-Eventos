@@ -5,10 +5,7 @@ using WPFGestaoDeEventos.Model;
 
 namespace WPFGestaoDeEventos.View
 {
-    /// <summary>
-    /// Interação lógica para MeusIngressos.xam
-    /// O code-behind só repassa os eventos para os controllers.
-    /// </summary>
+    // MVC: a View só lê os campos, chama o controller e mostra o resultado
     public partial class MeusIngressos : UserControl
     {
         private readonly InscricaoController _inscricaoController = new();
@@ -132,6 +129,7 @@ namespace WPFGestaoDeEventos.View
                 runData.Text = runTipo.Text = runDuração.Text = runLocal.Text = runDescricao.Text = "";
                 runCodigo.Text = runStatus.Text = "";
                 icPalestras.ItemsSource = null;
+                lblSemPalestras.Visibility = Visibility.Collapsed;
                 btnCancelar.IsEnabled = false;
                 btnCertificado.IsEnabled = false;
                 lblAviso.Visibility = Visibility.Visible;
@@ -150,15 +148,17 @@ namespace WPFGestaoDeEventos.View
 
             try
             {
-                icPalestras.ItemsSource = _inscricaoController.ListarPalestras(evento.EventoId);
+                var palestras = _inscricaoController.ListarPalestras(evento.EventoId);
+                icPalestras.ItemsSource = palestras;
+                lblSemPalestras.Visibility = palestras.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             }
             catch (Exception ex)
             {
                 MostrarErro(ex);
             }
 
-            btnCancelar.IsEnabled = inscricao.Status == "Confirmado";
-            bool utilizado = inscricao.Status == "Utilizado";
+            btnCancelar.IsEnabled = inscricao.Status == StatusInscricao.Confirmado;
+            bool utilizado = inscricao.Status == StatusInscricao.Utilizado;
             btnCertificado.IsEnabled = utilizado;
             lblAviso.Visibility = utilizado ? Visibility.Collapsed : Visibility.Visible;
         }
