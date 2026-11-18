@@ -20,6 +20,9 @@ public class Evento
     public int LocalId { get; set; }
     public Local Local { get; set; } = null!;
 
+    // Usado pelo card da Home (somente leitura, o EF ignora)
+    public string TipoEvento => this is Conferencia ? "Conferência" : "Workshop";
+
     public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
 
     public void abrirInscricoes()

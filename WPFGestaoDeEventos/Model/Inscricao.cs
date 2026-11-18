@@ -6,6 +6,9 @@ public class Inscricao
 {
     public int InscricaoId { get; set; }
 
+    // Confirmado, Cancelado ou Utilizado
+    public string Status { get; set; } = "Confirmado";
+
     public int EventoId { get; set; }
     public Evento Evento { get; set; } = null!;
 
@@ -16,7 +19,7 @@ public class Inscricao
 
     public override string ToString()
     {
-        return $"ID: {InscricaoId} / Evento: {Evento.Titulo} / Participante: {Participante.Nome}";
+        return $"ID: {InscricaoId} / Evento: {Evento?.Titulo} / Participante: {Participante?.Nome}";
     }
 
 }

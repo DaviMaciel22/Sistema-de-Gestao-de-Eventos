@@ -12,8 +12,8 @@ public class Certificado
 
     public override string ToString()
     {
-        return $"ID: {CertificadoId} / Data de Emissão: {DataEmissao} / Nome do Evento: {Inscricao.Evento.Titulo}" +
-            $" / Duração do Evento: {Inscricao.Evento.Duracao} / Nome do Participante: {Inscricao.Participante.Nome}";
+        return $"ID: {CertificadoId} / Data de Emissão: {DataEmissao} / Nome do Evento: {Inscricao?.Evento?.Titulo}" +
+            $" / Duração do Evento: {Inscricao?.Evento?.Duracao} / Nome do Participante: {Inscricao?.Participante?.Nome}";
     }
 
 
