@@ -55,7 +55,9 @@
                 <PasswordBox x:Name="pbSenhaAtual" Margin="0,0,0,12"/>
 
                 <TextBlock x:Name="lblNovaSenha" Text="Nova senha" Style="{StaticResource Rotulo}"/>
-                <PasswordBox x:Name="pbNovaSenha" Margin="0,0,0,12"/>
+                <PasswordBox x:Name="pbNovaSenha" Margin="0,0,0,4"/>
+                <TextBlock x:Name="lblAvisoSenha" Text="A senha precisa ter no mínimo 6 caracteres."
+                           Style="{StaticResource TextoSecundario}" FontSize="12" Margin="0,0,0,12"/>
 
                 <TextBlock x:Name="lblConfirmarNovaSenha" Text="Confirmar nova senha" Style="{StaticResource Rotulo}"/>
                 <PasswordBox x:Name="pbConfirmacao" Margin="0,0,0,20"/>

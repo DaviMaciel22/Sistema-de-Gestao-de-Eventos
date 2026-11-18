@@ -2,6 +2,7 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Herança: Conferencia e Workshop herdam de Evento
 public class Evento
 {
     public int EventoId { get; set; }
@@ -24,24 +25,4 @@ public class Evento
     public string TipoEvento => this is Conferencia ? "Conferência" : "Workshop";
 
     public ICollection<Inscricao> Inscricoes { get; set; } = new List<Inscricao>();
-
-    public void abrirInscricoes()
-    {
-        //abre as inscrições
-    }
-
-
-    public void encerrarInscricoes()
-    {
-        //encerra as inscrições do evento
-    }
-
-
-    public void vagasDisponiveis()
-    {
-        //verifica se ainda há vagas disponíveis e mostra o número de vagas restantes
-    }
-
-
-
 }

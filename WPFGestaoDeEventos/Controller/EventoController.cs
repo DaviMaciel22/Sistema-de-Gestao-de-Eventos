@@ -3,9 +3,18 @@ using WPFGestaoDeEventos.Repository;
 
 namespace WPFGestaoDeEventos.Controller
 {
+    // MVC: o Controller fica entre a tela (View) e os dados (Model/Repository)
     public class EventoController
     {
-        private readonly EventoRepository _repositorio = new();
+        // SOLID (DIP): depende da interface; a tela usa o construtor vazio, que cria o repositório real
+        private readonly IEventoRepository _repositorio;
+
+        public EventoController() : this(new EventoRepository()) { }
+
+        public EventoController(IEventoRepository repositorio)
+        {
+            _repositorio = repositorio;
+        }
 
         // Home: ao abrir a tela
         public List<Evento> ListarDisponiveis()

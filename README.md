@@ -61,7 +61,7 @@ O banco cobre os relacionamentos pedidos no trabalho:
 | 1xN | Um `Organizador` cria vários `Evento` |
 | NxN | `Participante` e `Evento`, ligados por `Inscricao` |
 | 1x1 | `Inscricao` e `Certificado` |
-| Composição | `Evento` e `Palestra` (as palestras são excluídas junto com o evento) |
+| Composição | `Conferencia` e `Palestra` (as palestras são excluídas junto com a conferência, regra `Cascade` no banco) |
 | Agregação | `Evento` e `Local` (o local continua existindo sem o evento) |
 | Funcionalidade via SQL | Busca de eventos da Home (nome, data, cidade e tipo), feita com uma consulta SQL parametrizada no repositório |
 

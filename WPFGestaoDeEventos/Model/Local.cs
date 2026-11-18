@@ -2,6 +2,7 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Agregação: o Local existe sozinho e pode receber vários eventos
 public class Local
 {
     public int LocalId { get; set; }

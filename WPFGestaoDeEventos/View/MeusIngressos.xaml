@@ -130,7 +130,7 @@
                                FontSize="24" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,16"/>
 
                     <WrapPanel Margin="0,0,0,6">
-                        <TextBlock x:Name="lblDataEHoraEvento" Margin="0,0,32,0"><Run Foreground="#FF64748B" Text="Data"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="E"/><Run Foreground="#FF64748B" Language="pt-br" Text=" "/><Run Foreground="#FF64748B" Text="Hora"/><Run Foreground="#FF64748B" Text=": "/><Run x:Name="runData"/></TextBlock>
+                        <TextBlock x:Name="lblDataEHoraEvento" Margin="0,0,32,0"><Run Text="Data e hora: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runData"/></TextBlock>
                         <TextBlock x:Name="lblTipoEvento" RenderTransformOrigin="0.477,0.512"><Run Text="Tipo: " Foreground="{StaticResource CorTextoSecundario}"/><Run x:Name="runTipo"/></TextBlock>
                     </WrapPanel>
                     <TextBlock x:Name="lblDuracao" Margin="0,0,0,6">
@@ -145,6 +145,8 @@
 
                     <!-- Palestras: composição Evento → Palestra -->
                     <TextBlock x:Name="lblPalestras" Style="{StaticResource TextoSecundario}" Margin="0,0,0,4"><Run Text="Palestras"/><Run Language="pt-br" Text=":"/></TextBlock>
+                    <TextBlock x:Name="lblSemPalestras" Text="Nenhuma palestra cadastrada." Visibility="Collapsed"
+                               Margin="12,0,0,16"/>
                     <ItemsControl x:Name="icPalestras" Margin="12,0,0,16">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

@@ -2,6 +2,7 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Herança: Workshop é um tipo de Evento
 public class Workshop : Evento
 {
     public int PalestraId { get; set; }

@@ -5,10 +5,7 @@ using WPFGestaoDeEventos.Model;
 
 namespace WPFGestaoDeEventos.View
 {
-    /// <summary>
-    /// Interação lógica para TelaInicial.xam
-    /// O code-behind só repassa os eventos para os controllers.
-    /// </summary>
+    // MVC: a View só lê os campos, chama o controller e mostra o resultado
     public partial class TelaInicial : UserControl
     {
         private readonly EventoController _eventoController = new();

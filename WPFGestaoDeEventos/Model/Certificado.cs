@@ -2,6 +2,7 @@
 
 namespace WPFGestaoDeEventos.Model;
 
+// Relação 1:1: cada Inscricao tem no máximo um Certificado
 public class Certificado
 {
     public int CertificadoId { get; set; }
