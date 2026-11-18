@@ -59,10 +59,12 @@ namespace WPFGestaoDeEventos.Model
                 .HasForeignKey(e => e.LocalId);
 
             //Relação 1:N entre Conferencia e Palestra
+            // Composição: ao excluir a conferência, as palestras dela são excluídas junto (Cascade)
             modelBuilder.Entity<Conferencia>()
                 .HasMany(c => c.Palestras)
                 .WithOne(p => p.Conferencia)
-                .HasForeignKey(p => p.ConferenciaId);
+                .HasForeignKey(p => p.ConferenciaId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             //Relação 1:1 entre Workshop e Palestra
             modelBuilder.Entity<Workshop>()

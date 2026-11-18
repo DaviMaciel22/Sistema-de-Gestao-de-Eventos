@@ -561,7 +561,8 @@ namespace WPFGestaoDeEventos.Migrations
                 {
                     b.HasOne("WPFGestaoDeEventos.Model.Conferencia", "Conferencia")
                         .WithMany("Palestras")
-                        .HasForeignKey("ConferenciaId");
+                        .HasForeignKey("ConferenciaId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WPFGestaoDeEventos.Model.Palestrante", "Palestrante")
                         .WithMany("Palestras")
