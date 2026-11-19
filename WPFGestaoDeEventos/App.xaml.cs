@@ -1,6 +1,8 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using WPFGestaoDeEventos.Model;
 
 namespace WPFGestaoDeEventos
 {
